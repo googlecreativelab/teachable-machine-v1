@@ -1,6 +1,6 @@
 # Teachable Machine 
 ## About
-Teachable Machine is an experiment that makes it easier for anyone to explore machine learning, live in the browser – no coding required. Learn more about the experiment and try it yourself on [g.co/teachable-machine](https://g.co/teachablemachine). 
+Teachable Machine is an experiment that makes it easier for anyone to explore machine learning, live in the browser – no coding required. Learn more about the experiment and try it yourself on [g.co/teachablemachine](https://g.co/teachablemachine). 
 
 The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library.
 
