@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share</title>
+</head>
+<body>
+<script type="text/javascript">
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function fbLogin() {
+        var oauth_url = 'https://www.facebook.com/v2.10/dialog/oauth';
+        oauth_url += '?client_id=1442525379177526';
+        oauth_url += '&scope=publish_actions';
+        oauth_url += '&redirect_uri=' + encodeURIComponent('https://teachablemachine.withgoogle.com/fb');
+        window.top.location = oauth_url;
+    }
+
+    var code = getParameterByName('code');
+    if (!code) {
+        fbLogin();
+    } else {
+        if (window.opener) {
+            window.opener.fbWindowCallback(code);
+            window.close();
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

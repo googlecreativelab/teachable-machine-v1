@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Teachable Machine</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/static/favicon/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="assets/static/favicon/favicon-152.png">
+    <link rel="shortcut icon" sizes="192x192" href="assets/static/favicon/favicon-192.png">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <meta name="fb:app_id" content="1442525379177526" />
+    <meta property="og:title" content="Teachable Machine" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://teachablemachine.withgoogle.com/" />
+    <meta property="og:image" content="https://teachablemachine.withgoogle.com/assets/static/share-image.jpg" />
+    <meta property="og:description" content="Teachable Machine: Explore machine learning, live in your browser." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@google" />
+    <meta name="twitter:title" content="Teachable Machine" />
+    <meta name="twitter:description" content="Teachable Machine: Explore machine learning, live in your browser." />
+    <meta name="twitter:image" content="https://teachablemachine.withgoogle.com/assets/static/share-image.jpg" />
+
+    <meta itemprop="name" content="Teachable Machine">
+    <meta itemprop="description" content="Teachable Machine: Explore machine learning, live in your browser.">
+    <meta itemprop="image" content="/assets/static/share-image.jpg">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Caveat:700|Poppins:400,500,600,700" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="bundle.js"></script>
+</head>
+<body class="no-scroll">
+    <div class="wrapper">
+        <div class="intro">
+            <div class="intro__sharing">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://teachablemachine.withgoogle.com" class="intro__share-link intro__share-link--facebook"></a>
+                <a href="https://twitter.com/home?status=Teachable%20Machine%3A%20Explore%20machine%20learning,%20live%20in%20your%20browser.%20No%20coding%20required%20%E2%86%92%20http%3A//g.co/teachablemachine%20%23teachablemachine" class="intro__share-link intro__share-link--twitter"></a>
+            </div>
+            <div class="intro__inner">
+                <h1 class="intro__title"><span class="hidden-text">Teachable Machine</span><img
+                    src="assets/teachable-machine-splash-desktop.svg" alt="" class="intro__title-image intro__title-image--desktop"><img src="assets/teachable-machine-splash-desktop.svg" alt="" class="intro__title-image intro__title-image--mobile"></h1>
+                    <span class="intro__content-desktop">
+                        <p class="intro__text">Teach a machine using your camera,<span class="intro__text-break"></span> live in the browser. No coding required.</p>
+                        <div class="intro__cta">
+                            <a href="#" class="button button--large button--color-blue" id="start-tutorial-button">
+                                <span class="button__content">
+                                    <span class="icon icon--speaker">
+                                    </span>
+                                    Let’s Go!
+                                </span>
+                            </a>
+                            <p class="wizard__launch-skip-paragraph">or <a href="#" class="link wizard__launch-skip" id="skip-tutorial-button">skip the tutorial</a></p>
+                            <p class="wizard__browser-warning">Sorry, your browser doesn’t support the latest technologies. <br>Download <a class="link" href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a> to use this and other experiments.</p>
+                        </div>
+                    </span>
+                    <span class="intro__content-mobile" id="is-compatible">
+                        <p class="font__weight--semi-bold intro__content-mobile-header">Mobile version <br>is highly experimental.</p>
+                        <p class="intro__content-mobile-body">If you’re new to machine learning, visit the site on a desktop for a helpful first-time tutorial and better performance.</p>
+                        <p class="intro__content-mobile-ok">
+                            <a href="#" class="link font__weight--semi-bold intro__content-mobile-ok-link"
+                            id="skip-tutorial-button-mobile">GOT IT</a>
+                        </p>
+                    </span>
+                    <span class="intro__content-mobile-incompatible" id="is-not-compatible">
+                        Sorry, looks like your browser or device doesn't support this experiment. Learn more about
+                        Teachable Machine <a href="" class="link">here.</a> Or try visiting this site on a desktop
+                        computer in a
+                        browser like Chrome.
+                    </span>
+                </div>
+                <div class="intro__footer">
+                    <a href="https://experiments.withgoogle.com/ai" target="_blank" class="link intro__footer-link--left"><img
+                        src="./assets/footer-intro.svg" class="intro__footer-image"
+                        alt="Made with some friends at Google"></a>
+                        <a href="https://www.google.com/policies/" target="_blank" class="link link--grey intro__footer-link--right">Privacy &amp; Terms</a>
+                    </div>
+                </div>
+                <div class="machine" id="machine">
+                    <div class="machine__sections">
+                        <div id="input-section" class="section section--disabled input section--input">
+                            <h2 class="section__title"><span>Input</span></h2>
+                            <div class="section__container">
+                                <div class="input__media"></div>
+                            </div>
+                        </div>
+                        <div class="wires wires--disabled wires--left">
+                            <?xml version="1.0" encoding="utf-8"?>
+                            <!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                            <svg version="1.1" class="wires-svg" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 323 68.8" style="enable-background:new 0 0 323 68.8;" xml:space="preserve">
+                                <style type="text/css">
+                                .st0{fill:none;stroke-miterlimit:10;}
+                            </style>
+                            <path class="st0 wire-base-green" d="M152.8,0c0,39.8-151.3,5.1-151.3,68.8"/>
+                            <path class="st0 wire-base-purple" d="M170.2,0c0,39.8,151.3,5.1,151.3,68.8"/>
+                            <line class="st0 wire-base-orange" x1="161.5" y1="0" x2="161.5" y2="68.8"/>
+                            <path class="st0 wire-green" d="M152.8,0c0,39.8-151.3,5.1-151.3,68.8"/>
+                            <path class="st0 wire-purple" d="M170.2,0c0,39.8,151.3,5.1,151.3,68.8"/>
+                            <line class="st0 wire-orange" x1="161.5" y1="0" x2="161.5" y2="68.8"/>
+                        </svg>
+                    </div>
+                    <div id="learning-section" class="section learning section--learning">
+                        <a href="#" id="learning-condensed-button" class="learning-condensed-button">
+                            <span class="arrow-line"></span>
+                            <span class="arrow-line"></span>
+                            <span class="arrow-line"></span>
+                            <span class="arrow-line"></span>
+                        </a>
+                        <h2 class="section__title section__title--learning"><span>Learning</span></h2>
+                        <div class="section__container">
+                            <div id="green" class="learning__class learning__class--disabled learning__class--green">
+                                <div class="examples">
+                                    <div class="machine__status examples__status"><span class="examples__counter">0</span> examples</div>
+                                    <div class="examples__wrapper">
+                                        <img src="assets/close.svg" class="examples__close-icon">
+                                        <a href="#" class="link link--reset">Reset</a>
+                                        <canvas class="examples__viewer"></canvas>
+                                    </div>
+                                </div>
+                                <div class="learning__class-column">
+                                    <div class="confidence">
+                                        <div class="machine__status confidence__status">Confidence</div>
+                                        <div class="machine__meter">
+                                            <div class="machine__value machine__value--color-green">
+                                                <div class="machine__percentage machine__percentage--white">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="button button--record button--color-green"><span class="button__content button__content--small">Train <span class="button__color-title">Green</span></span></a>
+                                </div>
+                            </div>
+                            <div id="purple" class="learning__class learning__class--disabled learning__class--purple">
+                                <div class="examples">
+                                    <div class="machine__status examples__status"><span class="examples__counter">0</span> examples</div>
+                                    <div class="examples__wrapper">
+                                        <img src="assets/close.svg" class="examples__close-icon">
+                                        <a href="#" class="link link--reset">Reset</a>
+                                        <canvas class="examples__viewer"></canvas>
+                                    </div>
+                                </div>
+                                <div class="learning__class-column">
+                                    <div class="confidence">
+                                        <div class="machine__status confidence__status">Confidence</div>
+                                        <div class="machine__meter">
+                                            <div class="machine__value machine__value--color-purple">
+                                                <div class="machine__percentage machine__percentage--white">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="button button--record button--color-purple"><span class="button__content button__content--small">Train <span class="button__color-title">Purple</span></span></a>
+                                </div>
+                            </div>
+                            <div id="orange" class="learning__class learning__class--disabled learning__class--orange">
+                                <div class="examples">
+                                    <div class="machine__status examples__status"><span class="examples__counter">0</span> examples</div>
+                                    <div class="examples__wrapper">
+                                        <img src="assets/close.svg" class="examples__close-icon">
+                                        <a href="#" class="link link--reset">Reset</a>
+                                        <canvas class="examples__viewer"></canvas>
+                                    </div>
+                                </div>
+                                <div class="learning__class-column">
+                                    <div class="confidence">
+                                        <div class="machine__status confidence__status">Confidence</div>
+                                        <div class="machine__meter">
+                                            <div class="machine__value machine__value--color-orange">
+                                                <div class="machine__percentage machine__percentage--white">0%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="button button--record button--color-orange"><span class="button__content button__content--small">Train <span class="button__color-title">Orange</span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wires wires--disabled wires--right">
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                        <svg version="1.1" class="wires-svg" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 323 77.6" style="enable-background:new 0 0 323 77.6;" xml:space="preserve">
+                        <filter id="blur-filter" x="-2" y="-2" width="100" height="100">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                      </filter>
+                      <style type="text/css">
+                      .st0{fill:none;stroke:#CED1D2;stroke-width:3;stroke-miterlimit:10;}
+                      .st1{fill:#F38759;}
+                      .st2{fill:#C174AE;}
+                      .st3{fill:#5EB84E;}
+                  </style>
+                  <path class="st0 wire--right-green" d="M75.1,69.4C75.1,29.3,1.5,64.2,1.5,0"/>
+                  <line class="st0 wire--right-purple" x1="161.5" y1="69.4" x2="161.5" y2="0"/>
+                  <path class="st0 wire--right-orange" d="M248.5,69.4c0-40.1,73-5.2,73-69.4"/>
+                  <path class="st3 wire--right-bulb-green" d="M83.9,73.8v3.8H66.3v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C82,69.4,83.9,71.4,83.9,73.8z"/>
+                  <path class="st2 wire--right-bulb-purple" d="M170.3,73.8v3.8h-17.6v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C168.4,69.4,170.3,71.4,170.3,73.8z"/>
+                  <path class="st1 wire--right-bulb-orange" d="M257.3,73.8v3.8h-17.6v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C255.4,69.4,257.3,71.4,257.3,73.8z"/>
+                  <path class="st3 wire--right-bulb-green-glow" d="M83.9,73.8v3.8H66.3v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C82,69.4,83.9,71.4,83.9,73.8z"/>
+                  <path class="st2 wire--right-bulb-orange-glow" d="M170.3,73.8v3.8h-17.6v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C168.4,69.4,170.3,71.4,170.3,73.8z"/>
+                  <path class="st1 wire--right-bulb-purple-glow" d="M257.3,73.8v3.8h-17.6v-3.8c0-2.4,1.9-4.3,4.3-4.3h9C255.4,69.4,257.3,71.4,257.3,73.8z"/>
+              </svg>
+          </div>
+          <div id="output-section" class="section section--disabled output section--output">
+            <h2 class="section__title"><span>Output</span></h2>
+            <div class="section__container">
+                <div class="output__controls">
+                    <div class="output__selector-wrapper">
+                        <div id="GIFOutput" class="output_selector__option output_selector__option--selected">GIF</div>
+                        <div id="SoundOutput" class="output_selector__option">Sound</div>
+                        <div id="SpeechOutput" class="output_selector__option">Speech</div>
+                    </div>
+                </div>
+                <div class="divider output__divider"></div>
+                <div id="output-player" class="output__player"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wizard__wrapper">
+    <div class="wizard" id="wizard">
+        <div class="wizard__inner">
+            <a href="#" class="wizard__sound-button">
+                <div class="wizard__sound-icon wizard__sound-icon--on"></div>
+            </a>
+            <div class="wizard__text">
+                <div class="wizard__text-inner"></div>
+                <div class="wizard__timer">
+                    <div class="wizard__timer-fill"></div>
+                </div>
+            </div>
+            <a href="#" class="wizard__skip-button">Skip<span> Tutorial</span></a>
+        </div>
+    </div>
+</div>
+<div class="recording" id="recording">
+    <div class="close-container" id="close__button">
+        <div class="close__button"></div>
+    </div>
+    <div class="recording__inner">
+        <p class="message" id="message">Record a 10-second video clip. You can use your mic to say something about it.</p>
+        <p class="restart" id="message-alt">Share your video below,<br> or <a href="#" class="restart" id="restart">redo it</a>.</p>
+        <canvas id="recording__canvas" class="recording__canvas"></canvas>
+        <video id="recording__video" width="680" height="340" autoplay loop controls></video>
+        <p class="record__timer" id="record__timer">0:10</p>
+        <div class="button-container">
+            <a href="#" class="button button--color-orange recording-start__button recording-start__button--disabled" id="recording__start-button">
+                <span class="button__content">
+                    <span id="icon--record" class="icon icon--record"></span>
+                    <span id="icon--stop" class="icon icon--stop"> </span>
+                    <span id="recording__start-text">Start Recording</span>
+                </span>
+            </a>
+            <a href="#" class="button button--color-facebook recording-share__button" id="recording__share-button">
+                <span class="button__content">
+                    <span id="icon--share" class="icon icon--share"></span>Post to Facebook
+                </span>
+            </a>
+            <div id="recording__legal">
+                <label><input id="recording__checkbox" type="checkbox">By checking this box I certify that I am over 13 years old</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="faq-record-container">
+    <div class="faq">
+        <div class="record" id="record-open-section">
+            <a href="#" class="button button--large button--color-blue" id="open-recorder"><span class="button__content"><span class="icon icon--recorder"></span>Record a video</span></a>
+            <p class="record-text">Share your machine with a screen captured video.</p>
+        </div>
+        <div class="faq__inner">
+            <h3 class="faq__question">What is this?</h3>
+            <p class="faq__answer">This experiment lets anyone explore how machine learning works, in a fun, hands-on way. You can teach a machine to using your camera, live in the browser – no coding required. Watch this video to learn more:
+                <iframe class="faq__video" width="424" height="238" src="https://www.youtube.com/embed/3BhkeY974Rg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            </p>
+            <h3 class="faq__question">What kind of things can I do?</h3>
+            <p class="faq__answer">Here are some links to things people have done so far: <a href="https://www.youtube.com/watch?v=LFHZtAasFXE&feature=youtu.be" class="link" target="_blank">Make your hand say moo</a>. <a href="https://www.youtube.com/watch?v=oP8-_0ZyY3U&feature=youtu.be" target="_blank" class="link">Rock out by wiggling your fingers</a>. And stay tuned, we’ll add more examples here soon. (Want to share something with us? Use the record button and share it on social media with #teachablemachine so we can check it out.)</p>
+            <h3 class="faq__question">Any tips I should keep in mind?</h3>
+            <p class="faq__answer">Capture at least 30 images per class. Be aware of when you’re pressing and releasing the button (that’s when it starts/stops capturing images). And you might need to capture lots of angles or variations of whatever it is you want your machine to recognize.</p>
+            <h3 class="faq__question">Why isn’t my machine working the way I want it to?</h3>
+            <p class="faq__answer">Don’t worry. Keep playing around. Seeing what works and what doesn’t is one way to explore how machine learning works. Keep in mind that your machine doesn’t have an understanding of higher level concepts, like faces or objects. It’s learning through the examples you give it. So if it’s not working the way you want, you might want to click the x to reset your classes and try out different approaches.</p>
+            <h3 class="faq__question">Where can I find more things like this?</h3>
+            <p class="faq__answer">Check out <a href="http://www.wekinator.org/" target="_blank" class="link">Wekinator</a> by Rebecca Fiebrink, one of the inspirations for this project. It lets anyone use machine learning through simple actions instead of code. <a href="http://ml4a.github.io/guides/" target="_blank" class="link">Here</a> are some interactive guides for learning about machine learning. And check out other fun projects like <a href="https://experiments.withgoogle.com/ai/objectifier-spatial-programming" target="_blank" class="link">this</a> and <a href="https://experiments.withgoogle.com/ai/giorgio-cam/view/" target="_blank" class="link">this</a>.</p>
+            <h3 class="faq__question">How do I learn more about machine learning?</h3>
+            <p class="faq__answer"><a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">Here’s</a> an intro-level video explainer. <a href="http://playground.tensorflow.org" target="_blank" class="link">This</a> site lets you interact with neural networks in more detail. And this <a href="https://www.kadenze.com/courses/machine-learning-for-musicians-and-artists/info" target="_blank" class="link">free online course</a> lets you dive in even deeper.</p>
+            <h3 class="faq__question">How was this built?</h3>
+            <p class="faq__answer">The image recognition is powered by a <a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">neural network</a>. It uses the open-source library <a href="https://pair-code.github.io/deeplearnjs/" target="_blank" class="link">deeplearn.js</a>, which allows web developers to run machine learning models locally in the browser. That’s how your machine responds so quickly. We’ve also open-sourced the experiment <a href="https://github.com/googlecreativelab/teachable-machine" target="_blank" class="link">here on Github</a>.</p>
+            <h3 class="faq__question">Who made this?</h3>
+            <p class="faq__answer">This experiment was a collaborative effort by friends from <a href="http://stoj.io" target="_blank" class="link">Støj</a>, <a href="https://useallfive.com/" target="_blank" class="link">Use All Five</a> and Creative Lab and PAIR teams at Google.</p>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <a href="https://experiments.withgoogle.com/ai" target="_blank" class="link"><img class="footer__image" src="./assets/footer.svg" alt="Made with some friends at Google"></a>
+    <a href="https://www.google.com/policies/" target="_blank" class="link link--privacy">Privacy &amp; Terms</a>
+</footer>
+<p id="input__media__activate" class="input__media__activate">
+    <img src="./assets/arrows/arrow-4.svg" width="30" height="80">To teach your machine,
+    <span class="input__media__activate--desktop"> you need to click up here to turn on your camera and then <a href="#">refresh the page</a>.</span>
+    <span class="input__media__activate--mobile"> you need to <a href="#">refresh the page</a> and allow camera access.</span>
+</p>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107306747-1"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)}; gtag('js', new Date()); gtag('config', 'UA-107306747-1'); </script>
+<script type="text/javascript">
+    if (
+        (navigator.userAgent.indexOf('MSIE') > -1) ||
+        (navigator.userAgent.indexOf('Trident') > -1) ||
+        (navigator.userAgent.indexOf('Edge') > -1)) {
+        document.querySelector('.wizard__browser-warning').style.display = 'block';
+    document.querySelector('.wizard__launch-skip-paragraph').style.display = 'none';
+    document.getElementById('start-tutorial-button').style.display = 'none';
+}
+if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
+    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) {
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        document.getElementById('is-not-compatible').style.display = 'block';
+        document.getElementById('is-compatible').style.display = 'none';
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+.faq {
+	max-width: 1060px
+	margin: 0 auto
+	color: $color__text--light
+	position: relative
+	user-select: initial
+	@extend .font__size--normal
+}
+
+.faq__inner {
+	width: 40%
+}
+
+.faq__question {
+	margin-top: space(4)
+	margin-bottom: 8px
+	@extend .font__size--normal
+	@extend .font__weight--bold
+}
+
+.faq__answer {
+	margin-top: 0
+}
+
+.faq__video {
+	width: 100%
+	margin-top: space(2.5)
+}
+
+.faq-record-container {
+	position: relative
+}
+
+.record {
+	position: absolute
+	right: 0
+	top: 0
+	width: 20%
+	text-align: right
+}
+
+.record-text {
+	color: $color__blue--primary
+	width: 100%
+	text-align: center
+	margin: 0 auto
+}
+
+@media screen and (max-width: 900px) {
+	.faq {
+		margin: 0
+		margin-bottom: space(8)
+		padding: 0 15px
+	}
+
+	.faq__inner {
+		width: 90%
+	}
+	
+	.record {
+		display: none
+	}
+
+	.faq-record-container {
+		//display: none
+	}
+}

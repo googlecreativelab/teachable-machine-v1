@@ -1,0 +1,111 @@
+.output__container--speech {
+	background: $color__white
+}
+
+.output__speech-class {
+	@extend .output__sound-class
+}
+
+
+.output__speech-speaker {
+	@extend .output__sound-speaker
+}
+
+.output__speech-speaker--green svg {
+	fill: $color__class-green--primary
+}
+
+
+.output__speech-speaker--purple svg {
+	fill: $color__class-purple--primary
+}
+
+.output__speech-speaker--orange svg {
+	fill: $color__class-orange--primary
+}
+
+
+.output__speech-speaker--active svg {
+	@extend .output__sound-speaker--active svg 
+}
+	
+.output__speech-edit {
+	@extend .output__sound-edit
+}
+
+.output__speech-edit:after {
+	content: "Say"
+	position: absolute
+	top: 0
+	left: 25px
+	line-height: 50px
+	color: $color__black
+}
+
+.output__speech-edit--green svg {
+	fill: $color__class-green--primary
+}
+
+
+.output__speech-edit--purple svg {
+	fill: $color__class-purple--primary
+}
+
+.output__speech-edit--orange svg {
+	fill: $color__class-orange--primary
+}
+
+.output__speech-delete {
+	position: absolute
+	width: 40px
+	height: 42px
+	right: 4px
+	cursor: pointer
+	background: white
+	background-image: url(assets/outputs/delete-icon.svg)
+	background-size: 40%
+	background-repeat: no-repeat
+	background-position: center center
+}
+
+
+.output__speech-input {
+	width: calc(100% - 50px)
+	padding-left: space(7)
+	padding-right: 40px
+	height: 50px
+	border: 4px solid $color__background
+	outline: none
+	position relative
+	
+	@extend .font__size--small
+}
+
+.output__speech-input--green {
+	color: $color__class-green--primary
+}
+
+.output__speech-input--purple {
+	color: $color__class-purple--primary	
+}
+
+.output__speech-input--orange {
+	color: $color__class-orange--primary	
+}
+
+
+.output__speech-input--green:hover, .output__speech-input--green-selected {
+	border-color: $color__class-green--primary
+}
+
+.output__speech-input--purple:hover, .output__speech-input--purple-selected {
+	border-color: $color__class-purple--primary	
+}
+
+.output__speech-input--orange:hover, .output__speech-input--orange-selected {
+	border-color: $color__class-orange--primary	
+}
+
+.output__speech-input--nothing {
+	color: rgba($color__black, 0.2);
+}

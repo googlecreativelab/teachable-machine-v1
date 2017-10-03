@@ -1,0 +1,801 @@
+
+.disabled {
+	pointer-events: none
+}
+
+.dimmed {
+	-webkit-filter: grayscale(25%)
+	opacity: 0.3
+}
+
+.machine {
+	position: relative
+	background: $color__background
+	padding-top: space(8)
+	padding-bottom: space(10)
+	text-align: center
+	
+	@extend .font__size--small
+	letter-spacing: 0.3px
+}
+
+.machine__sections {
+	display: flex
+	align-items: flex-start
+	// align-items: center
+	justify-content: center
+	text-align: center
+	max-width: 1360px
+	margin-left: auto
+	margin-right: auto
+}
+
+.section {
+	width: 360px
+}
+
+.section--disabled {
+	@extend .disabled
+}
+
+.section__title {
+	height: 30px
+	line-height: 30px
+	@extend .uppercase
+	@extend .font__size--small
+}
+
+.section__container {
+	background: $color__white
+	border-radius: 5px
+	padding: space(1.5)
+}
+
+.section--input {
+	position: relative
+	margin-top: 70px
+	width: 300px
+}
+
+.input__media {
+	background: $color__background
+	overflow: hidden
+	position: relative
+	height: 270px
+}
+
+.input__media__activate {
+	display: none
+	position: fixed
+	top: -20px
+	right: 0
+	width: 325px
+	background: white
+	padding: 20px
+
+	img {
+		margin-left: 20px
+		float: right
+	}
+}
+
+.input__media__activate--mobile {
+	display: none
+}
+
+.input__camera {
+	width: 100%
+	height: 100%
+	position: relative
+}
+
+.input__camera-video {
+	display: block
+	position: absolute
+	left: 50%
+	top: 50%
+}
+
+.section--learning {
+	position: relative
+	width: 360px
+	top: -10px
+}
+
+.learning-condensed {
+	display: none
+}
+
+.learning__class {
+	position: relative
+	margin-bottom: space(2)
+	display: flex
+	text-align: left
+}
+
+.learning__class--disabled {
+	@extend .disabled
+}
+
+.learning__class--neutral {
+	color: $color__class-neutral--primary
+}
+
+.learning__class--green {
+	color: $color__class-green--primary
+}
+
+.learning__class--purple {
+	color: $color__class-purple--primary
+}
+
+.learning__class--orange {
+	color: $color__class-orange--primary
+}
+
+.learning__class:last-of-type {
+	margin-bottom: 0
+}
+
+
+.examples {
+	margin-right: space(1.5)
+}
+
+.examples__wrapper {
+	position: relative
+	width: 103px
+	height: 103px
+	overflow: hidden
+}
+
+.examples__close-icon {
+	position: absolute
+	z-index: 2
+	top: space(1)
+	right: space(1)
+	width: 15px
+	height: 15px
+}
+
+
+.link--reset {
+	position: absolute
+	z-index: 2
+	bottom: 0px
+	text-align: center
+	width: 100%
+	height: 100%
+	vertical-align: middle
+	justify-content: center
+	align-items: center
+	display: none
+	cursor: pointer
+	background: rgba($color__black, 0.5)
+	color: $color__white
+}
+
+.examples__wrapper:hover .examples__close-icon {
+	display: none
+}
+.examples__wrapper:hover .link--reset {
+	display: flex
+}
+
+.examples__viewer {
+	width: 103px
+	height: 103px
+	background: $color__background
+	transform: scaleX(-1)
+}
+
+.learning__class-column {
+	width: 100%
+	display: flex
+	flex-direction: column
+}
+
+.button--record {
+	margin-top: space(1.5)
+	width: 100%
+	height: 50px
+	flex: none
+	
+	@extend .font__size--small
+	@extend .uppercase
+}
+
+
+.machine__status {
+	// @extend .font__size--xsmall
+	@extend .uppercase
+	text-align: left
+	height: space(2.5)
+	min-width: 75px
+}
+
+.confidence {
+	flex: 1
+}
+
+.machine__meter {
+	position: relative
+	width: 100%
+	height: 30px
+	background: $color__background
+}
+
+.machine__value {
+	position: relative
+	z-index: 2
+	width: 0
+	height: 100%
+	background: $color__blue--primary
+	overflow: hidden
+}
+
+.machine__value--color-neutral {
+	background: $color__class-neutral--primary
+}
+
+.machine__value--color-green {
+	background: $color__class-green--primary
+}
+
+.machine__value--color-purple {
+	background: $color__class-purple--primary
+}
+
+.machine__value--color-orange {
+	background: $color__class-orange--primary
+}
+
+
+.machine__meter--quality {
+	margin-top: space(1)
+}
+
+.machine__percentage {
+	position: absolute
+	top: 0
+	left: space(1)
+	width: 100%
+	top: 50%
+	transform: translateY(-50%)
+	text-align: left
+}
+
+.machine__percentage--white {
+	color: $color__white
+}
+
+.machine__meter--quality {
+
+}
+
+.quality {
+
+}
+
+.quality__status {
+	margin-top: space(1)
+}
+
+//
+//	Output
+//
+.section--output {
+	position: relative
+	// margin-top: $section__offset
+	margin-top: 20px
+	width: 300px
+}
+
+.output__player {
+	position: relative
+	background: $color__background
+	height: 300px
+}
+
+.output__container {
+	width: 100%
+	height: 100%
+}
+
+.output__canvas {
+	width: 100%
+	height: 100%
+}
+
+.divider {
+	height: 1px
+	background: $color__divider
+	margin-top: space(1)
+	margin-right: space(-1)
+	margin-bottom: space(1)
+	margin-left: space(-1)
+}
+
+.output__controls {	
+	height: 40px
+	display: flex
+}
+
+.output__selector-wrapper {
+	width: 100%
+	// width: 150px
+	// flex: none
+	// margin-right: space(1)
+	position: relative
+	display: flex
+	justify-content: space-around
+	align-items: center
+	
+	@extend .font__size--large
+}
+
+.output_selector__option {
+	// display: inline-block
+	flex: 1 1 1
+	cursor: pointer
+	margin: 0
+}
+
+.output_selector__option--selected {
+	color: $color__blue--primary
+	text-decoration: underline
+}
+
+.output_selector__option:hover {
+	@extend .output_selector__option--selected	
+}
+
+// .output__selector-title-wrapper {
+// 	position: absolute
+// 	width: 100%
+// 	height: 100%
+// 	top: 0
+// 	background: $color__white
+	
+// }
+
+
+// .output__selector {
+// 	position: absolute
+// 	z-index: 2
+// 	top: 0
+// 	left: space(1)
+// 	width: 100%
+// 	height: 100%
+// 	outline: none
+// 	opacity: 0
+// }
+
+// .output__selector-title {
+// 	position: absolute
+// 	display: inline-block
+// 	width: 100%
+// 	left: 0
+// 	top: 50%
+// 	color: $color__blue--primary
+// 	transform: translateY(-50%)
+// 	@extend .font__size--large
+// }
+
+// .output__selector-title:after {
+// 	content: ' '
+// 	display: inline-block
+// 	width: 14px
+// 	height: 14px
+// 	margin-left: space(1)
+// 	background-repeat: no-repeat
+// 	background-size: 100%
+// 	background-position: center center
+// 	background-image: url(assets/select-arrow.svg)
+// }
+
+
+//
+//	Wires
+//
+.wires {
+	position: relative
+	width: 50px
+	height: 400px
+	// margin-top: 30px + $section__offset
+	margin-top: 30px
+}
+
+.wires--disabled {
+	@extend .disabled
+}
+
+.wires-svg {
+	display: none
+}
+
+.wires--left {
+
+}
+
+.wires--right {
+	
+}
+
+.wires__bulb {
+	position: absolute
+	right: 0
+	top: 0
+	width: 18px
+	height: 34px
+	margin-top: -13px
+	background-image: url(assets/leds.png)
+	background-size: 60px
+	background-repeat: no-repeat
+	background-position-x: 0
+	background-position-y: 0
+}
+
+.wires__bulb-green {
+	background-position-x: 0px
+
+}
+
+.wires__bulb-purple {
+	background-position-x: -22px
+	
+}
+
+.wires__bulb-orange {
+	background-position-x: -42px
+
+}
+
+.wires__bulb--selected {
+	background-position-y: -34px
+}
+
+
+
+//
+//	Share button
+//
+.button--share {
+	height: 60px
+	margin-top: space(2)
+}
+
+.recording-download-container {
+	color: $color__white
+	position: relative
+	top: 50px
+}
+
+@media screen and (max-width: 900px) {
+
+	.examples {
+		margin-right: space(1)
+	}
+
+	.wires {
+		margin-top: 51px
+	}
+	
+	.wires__bulb {
+		display: none
+	}
+
+	.machine {
+		padding: 0 15px
+		padding-bottom: space(4)
+		padding-top: space(6)
+	}
+
+	.machine__sections {
+		display: block
+		margin-bottom: space(2)
+	}
+
+	.section {
+		max-width: 510px
+		margin: 0 auto
+		width: 100%
+
+		&.learning {
+
+			&.condensed {
+
+				.examples,
+				.confidence__status {
+					display: none
+				}
+
+				.machine__meter {
+					height: 15px
+				}
+			}
+		}
+	}
+
+	.input {
+		max-width: 300px
+		
+		.section__container {
+			display: flex
+			flex-direction: column
+		}
+
+		.input__media {
+			height: 270px
+			order: 2
+			margin-bottom: 0
+		}
+		
+		.button-set {
+			order: 1
+			margin-bottom: space(1)
+		}
+	}
+	
+	.section--output {
+		max-width: 300px
+		top: -10px
+
+		.section__container {
+			display: block
+		}
+	}
+
+	.section--learning {
+		height: auto
+
+		.section__container {
+			justify-content: center
+		}
+
+		.button__label {
+			font-size: 12px
+		}
+
+		.learning-condensed-button {
+			display: block
+			border-top-left-radius: 0.4em
+			border-top-right-radius: 0.4em
+			display: block
+			position: absolute
+			top: -38px
+			right: 0
+			background: $color__white
+			width: 40px
+			height: 40px
+			z-index: 1
+
+			.arrow-line {
+				background-color: $color__grey--primary
+				width: 10px
+				height: 2px
+				position: absolute
+
+				&:first-child {
+					transform: rotate(-45deg)
+					top: 10px
+				}
+
+				&:nth-child(2) {
+					transform: rotate(45deg)
+					top: 25px
+				}
+
+
+				&:nth-child(3) {
+					transform: rotate(-45deg)
+					top: 25px
+				}
+
+				&:nth-child(4) {
+					transform: rotate(45deg)
+					top: 10px
+				}
+
+				&:first-child,
+				&:nth-child(2) {
+					left: 19px
+				}
+
+				&:nth-child(3),
+				&:nth-child(4) {
+					left: 12px
+				}
+			}
+		}
+
+		&.condensed {
+
+			.examples,
+			.confidence__status,
+			.button--record {
+				display: none
+			}
+
+			.arrow-line {
+
+				&:first-child,
+				&:nth-child(3) {
+					transform: rotate(45deg)
+				}
+
+				&:nth-child(2),
+				&:nth-child(4) {
+					transform: rotate(-45deg)
+				}
+			}
+		}
+	}
+
+	.wires-svg {
+		display: block
+	}
+
+	.wires--left,
+	.wires--right {
+		height: auto
+		width: 65vw
+		max-width: 400px
+		margin: 0 auto
+	}
+
+	.wire-base-green,
+	.wire-base-purple,
+	.wire-base-orange {
+		stroke: #CED1D2
+		stroke-width: 3px
+	}
+	
+	// @stylint off
+		
+	.wire-green,
+	.wire-purple,
+	.wire-orange {
+
+		&.animate {
+			stroke: $color__text--dark
+			stroke-width: 4px
+			stroke-dashoffset: 3
+			stroke-dasharray: 3
+			animation: dash 0.5s linear infinite
+		}
+	}
+
+	.wire--right-bulb-green-glow {
+
+		&.bulb--selected {
+			//stroke: $color__class-green--primary
+			stroke: #33ec5e
+			filter: url(#blur-filter)
+	   	}
+	}
+
+	.wire--right-bulb-purple-glow {
+
+		&.bulb--selected {
+			//stroke: $color__class-purple--primary
+			stroke: #ff88ff
+			filter: url(#blur-filter)
+		}
+	}
+
+	.wire--right-bulb-orange-glow {
+
+		&.bulb--selected {
+			stroke: $color__class-orange--primary
+			filter: url(#blur-filter)
+		}
+	}
+	
+	
+
+	@keyframes dash {
+		from {
+			stroke-dashoffset: 30
+		}
+		to {
+			stroke-dashoffset: 0
+		}
+	}
+	
+	// @stylint on
+
+	.wires--right {
+		top: -10px
+	}
+
+	.learning-section {
+		@include clearfix()
+	}
+
+	.section__title {
+		position: absolute
+		top: -35px
+		width: 100%
+		margin: 0 auto
+
+		&.section__title--learning {
+			top: -30px
+		}
+
+		span {
+			background-color: #ededee
+		}
+	}
+	
+	.section__container {
+		display: flex
+		padding: 10px
+	}
+
+	.examples__wrapper {
+		width: 100%
+	}
+
+	.learning__class {
+		display: flex
+		justify-content: flex-end
+		flex-direction: column
+		float: left
+		width: 33.333%
+		margin-bottom: 0
+		margin-left: 3%
+	}
+
+	.button--record {
+		order: 3
+	}
+
+	.machine__status {
+		height: auto
+		text-align: center
+	}
+
+	.examples__viewer {
+		width: 100%
+		height: 90px
+	}
+
+	.confidence {
+		margin-right: 10px
+	}
+
+	.machine__meter {
+		height: 40px
+	}
+
+	.machine__percentage {
+		height: 40px
+		line-height: 40px
+	}
+
+	.divider {
+		display: flex
+		flex-direction: column
+		float: left
+		margin: 10px 0
+		width: 100%
+	}
+	
+	.quality__status {
+		text-align: center
+	}
+
+	.output__controls {
+		width: 100%
+	}
+
+	.input__media__activate--mobile {
+		display: block
+	}
+
+	.input__media__activate--desktop {
+		display: none
+	}
+
+}

@@ -1,0 +1,35 @@
+.footer {
+	max-width: 1060px
+	margin-left: auto
+	margin-right: auto
+	margin-top: space(6)
+	margin-bottom: space(6)
+	
+	.link {
+		display: block
+		max-width: 400px
+		position: relative
+	}
+	
+	.link--privacy {
+		margin-top: space(1)
+		display: inline-block
+		color: rgba($color__black, 0.2)
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.footer {
+		padding: 0 15px
+
+		.link {
+			display: block
+			max-width: 400px
+			position: relative
+		}
+	}
+
+	.footer__image {
+		width: 100%
+	}
+}

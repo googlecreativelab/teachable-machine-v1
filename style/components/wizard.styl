@@ -1,0 +1,167 @@
+.wizard {
+	width: 100vw
+	background: $color__black
+	position: relative
+}
+
+.wizard--fixed {
+	position: fixed
+	bottom: 0px
+}
+
+.wizard__wrapper {
+	position: relative
+	overflow: hidden
+	width: 100vw
+	z-index: 100
+}
+
+.wizard__inner {
+	width: 100vw
+	max-width: 1180px
+	padding: space(2) space(2)
+	margin: 0 auto
+	display: flex
+	vertical-align: middle
+	justify-content: space-between
+}
+
+.wizard__sound-button {
+	display: inline-block
+	width: 40px
+	height: 40px
+	margin: auto space(2) auto 0
+	background: $color__black
+	display: none
+}
+
+.wizard__sound-icon {
+	width: 30px
+	height: 30px
+	background-image: url(assets/speaker-icon.svg)
+	background-repeat: no-repeat
+	background-size: 100%
+	background-position-y: 0px
+	margin: 5px
+}
+
+.wizard__sound-icon.wizard__sound-icon--on {
+	background-position-y: -30px
+}
+
+.wizard__text {
+	flex: 1
+	flex-direction: column;
+	justify-content: center;
+	margin: auto 0 auto 0
+	height: 52px
+	text-align: left
+	display: flex
+	
+	@extend .font__size--normal
+}
+
+.wizard__timer {
+	position: relative
+	margin-top: space(0.5)
+	width: 80px
+	height: 2px
+	background: rgba($color__white, 0.27)
+	overflow: hidden
+}
+
+.wizard__timer-fill {
+	width: 0px
+	height: 2px
+	background: $color__white
+}
+
+.wizard__skip-button {
+	
+}
+
+.wizard__text-inner {
+	width: 80%
+	vertical-align: middle
+	align-items: center
+}
+
+
+.wizard__skip-button {
+	display: inline-block
+	flex: none
+	padding: 0 space(1)
+	height: 40px
+	line-height: 40px
+	text-transform: uppercase
+	background: black
+	margin: auto 0 auto space(2)
+	cursor: pointer
+	color: $color__white
+	text-decoration: none
+}
+
+
+.wizard__arrow {
+	position: absolute
+	z-index: 100
+	top: 0
+	left: 0
+	pointer-events: none
+	display: none
+}
+
+.wizard__gif {
+	z-index: 100000
+	position: absolute
+	width: 180px
+	height: 194px
+	background-image: url(assets/wizard/gif-backdrop.svg)
+	background-size: contain
+	background-position: 0 0
+	background-repeat: no-repeat
+	display: none
+}
+
+.wizard__gif-mask {
+	position: relative
+	width: 140px
+	height: 140px
+	overflow: hidden
+	margin-top: 35px
+	margin-left: 20px
+}
+
+.wizard__gif-image {
+	width: 100%
+}
+	
+@media screen and (max-width: 900px) {
+
+	.wizard__arrow {
+		opacity: 0
+	}
+
+	.wizard__sound-button {
+		margin-right: 5px
+	}
+
+	.wizard__text-inner {
+		font-size: 11px
+		width: 100%
+	}
+	
+	.wizard__skip-button {
+		
+		span {
+			display: none
+		}
+	}
+}
+@media screen and (max-height: 680px) {
+
+	.wizard__gif {
+		top: -130px
+		left: -100px
+	}
+}

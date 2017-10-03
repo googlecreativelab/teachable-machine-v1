@@ -1,0 +1,194 @@
+.button {
+	display: inline-block
+	text-decoration: none
+	text-align: center
+	color: $color__white
+	margin: 0
+	@extend .font__size--large
+}
+
+.button--disabled {
+	pointer-events: none
+	-webkit-filter: grayscale(100%)
+	opacity: 0.3
+}
+
+
+.button-set {
+	height: 48px
+	width: 100%
+	text-align: left
+}
+
+.button__toggle {
+	position: relative
+	width: 50%
+}
+
+.button__toggle:first-of-type {
+	z-index: 2
+}
+
+.button__toggle:last-of-type {
+	margin-left: -12px
+}
+
+.button__content {
+	padding-left: space(2)
+	padding-right: space(2)
+}
+
+.button__content--large {
+	@extend .font__size--xlarge
+}
+
+.button__content--small {
+	width: 36px
+	height: 36px
+	@extend .font__size--small
+}
+
+.button__mask {
+	position: relative
+	overflow: hidden
+	width: 100%
+	height: 100%
+}
+
+.button__label {
+	position: absolute
+}
+
+// Colors
+.front-face {
+	transition: fill 0.1s ease-out
+	fill: $color__grey--primary
+}
+
+.left-face {
+	transition: fill 0.1s ease-out
+	fill: $color__grey--shadow-left
+}
+
+.bottom-face {
+	transition: fill 0.1s ease-out
+	fill: $color__grey--shadow-bottom
+}
+
+
+.front-face--blue {
+	fill: $color__blue--primary
+}
+
+.left-face--blue {
+	fill: $color__blue--shadow-left
+}
+
+.bottom-face--blue {
+	fill: $color__blue--shadow-bottom
+}
+
+.front-face--grey {
+	fill: $color__grey--primary
+}
+
+.left-face--grey {
+	fill: $color__grey--shadow-left
+}
+
+.bottom-face--grey {
+	fill: $color__grey--shadow-bottom
+}
+
+.front-face--neutral {
+	fill: $color__class-neutral--primary
+}
+
+.left-face--neutral {
+	fill: $color__class-neutral--shadow-left
+}
+
+.bottom-face--neutral {
+	fill: $color__class-neutral--shadow-bottom
+}
+
+.front-face--green {
+	fill: $color__class-green--primary
+}
+
+.left-face--green {
+	fill: $color__class-green--shadow-left
+}
+
+.bottom-face--green {
+	fill: $color__class-green--shadow-bottom
+}
+
+.front-face--purple {
+	fill: $color__class-purple--primary
+}
+
+.left-face--purple {
+	fill: $color__class-purple--shadow-left
+}
+
+.bottom-face--purple {
+	fill: $color__class-purple--shadow-bottom
+}
+
+.front-face--orange {
+	fill: $color__class-orange--primary
+}
+
+.left-face--orange {
+	fill: $color__class-orange--shadow-left
+}
+
+.bottom-face--orange {
+	fill: $color__class-orange--shadow-bottom
+}
+
+.button__toggle--selected {
+	.front-face {
+		@extend .front-face--blue
+	}
+
+	.left-face {
+		@extend .left-face--blue
+	}
+
+	.bottom-face {
+		@extend .bottom-face--blue
+	}
+}
+
+.front-face--facebook {
+	fill: $color__facebook--primary
+}
+
+.left-face--facebook {
+	fill: $color__facebook--shadow-left
+}
+
+.bottom-face--facebook {
+	fill: $color__facebook--shadow-bottom
+}
+
+.front-face--twitter {
+	fill: $color__twitter--primary
+}
+
+.left-face--twitter {
+	fill: $color__twitter--shadow-left
+}
+
+.bottom-face--twitter {
+	fill: $color__twitter--shadow-bottom
+}
+
+@media screen and (max-width: 900px) {
+
+	.button__color-title {
+		display: none
+	}
+}

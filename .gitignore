@@ -1,0 +1,10 @@
+node_modules/
+.sass-cache
+.DS_Store
+*.swp
+public/*
+.idea
+server.key
+server.cer
+*.pyc
+lib/*

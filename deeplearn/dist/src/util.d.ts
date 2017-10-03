@@ -1,0 +1,25 @@
+export declare type Vector = number[] | Float64Array | Float32Array | Int32Array | Int8Array | Int16Array;
+export declare function shuffle(array: any[] | Uint32Array | Int32Array | Float32Array): void;
+export declare function clamp(min: number, x: number, max: number): number;
+export declare function randUniform(a: number, b: number): number;
+export declare function randGauss(mean?: number, stdDev?: number, truncated?: boolean): number;
+export declare function distSquared(a: Vector, b: Vector): number;
+export declare function assert(expr: boolean, msg: string): void;
+export declare function assertShapesMatch(shapeA: number[], shapeB: number[], errorMessagePrefix?: string): void;
+export declare function flatten(arr: any[], ret?: number[]): number[];
+export declare type ArrayData = number | number[] | number[][] | number[][][] | number[][][][];
+export declare function inferShape(arr: ArrayData): number[];
+export declare function sizeFromShape(shape: number[]): number;
+export declare function isScalarShape(shape: number[]): boolean;
+export declare function arraysEqual(n1: any[] | Float32Array, n2: any[] | Float32Array): boolean;
+export declare function isInt(a: number): boolean;
+export declare function tanh(x: number): number;
+export declare function sizeToSquarishShape(size: number): [number, number];
+export declare function createShuffledIndices(n: number): Uint32Array;
+export declare function assertAndGetBroadcastedShape(shapeA: number[], shapeB: number[]): number[];
+export declare function rightPad(a: string, size: number): string;
+export declare function repeatedTry(checkFn: () => boolean, delayFn?: (counter: number) => number, maxCounter?: number): Promise<void>;
+export declare function getQueryParams(queryString: string): {
+    [key: string]: string;
+};
+export declare function inferFromImplicitShape(shape: number[], size: number): number[];

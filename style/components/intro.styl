@@ -1,0 +1,305 @@
+.intro {
+	background: #e9e9e9
+	position: fixed
+	z-index: 101
+	width: 100%
+	height: 100%
+	display: flex
+	justify-content: center
+	align-items: center
+}
+
+.intro__sharing {
+	flex: none
+	position: absolute
+	top: space(2)
+	right: space(2)
+}
+
+.intro__share-link {
+	display: inline-block
+	width: 30px
+	height: 30px
+	margin: 0 0 0 space(0.5)
+	
+	svg {
+		margin: 15%
+		width: 70%
+		height: 70%
+		fill: #808184
+	}
+}
+
+.intro__share-link:hover svg {
+	fill: $color__blue--primary
+}
+
+.intro__footer {
+	align-items: flex-end
+	bottom: 0px
+	display: flex
+	justify-content: space-between
+	left: 0
+	padding: space(2)
+	position: absolute
+	width: 100%
+}
+
+.intro__footer-link--left {
+	width: 300px
+}
+
+.intro__footer-link--right {
+	color: #929395
+	font-size: 14px
+	position: relative
+	text-decoration: none
+	top: -5px
+}
+
+.intro__footer-image {
+	width: 100%
+}
+
+.intro__content-mobile {
+	display: none
+}
+	
+.intro__content-mobile-incompatible {
+	display: none
+}
+
+.intro__inner {
+	text-align: center
+	padding-top: space(3)
+	padding-bottom: space(3)
+	max-width: 1060px
+	z-index: 2
+	width: 100vw
+	@extend .font__size--normal
+}
+
+
+.intro__cta {
+	margin-top: space(2)
+}
+
+.wizard__browser-warning {
+	display: none
+}
+
+.intro__image {
+	width: 100%
+	max-width: 400px
+}
+
+.intro__title {
+	margin-top: space(1)
+	width: 100%
+}
+
+.intro__title-image {
+	width: 100%
+	height: 220px
+
+	&.intro__title-image--desktop{
+		display: block
+	}
+
+	&.intro__title-image--mobile{
+		display: none
+	}
+}
+
+.intro__title-image--teachable {
+	margin-right: 25px
+}
+
+.intro__title-image--machine {
+
+}
+
+.intro__text {
+	max-width: 420px
+	margin-top: space(5)
+	margin-bottom: 0
+	margin-left: auto
+	margin-right: auto
+	white-space: nowrap
+}
+
+.intro__text-break {
+	display: block
+}
+
+.intro__video {
+	position: relative
+	max-width: 800px
+	height: 0
+	margin-left: auto
+	margin-right: auto
+	margin-bottom: space(2)
+	overflow: hidden
+}
+.intro__video-wrapper {
+	position: relative
+	padding-bottom: 56.25% /* 16:9 */
+	padding-top: 25px
+	height: 0
+	margin-bottom: space(2)
+}
+.intro__video-player {
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	background: $color__black
+}
+
+@media screen and (max-width: 900px) {
+
+	.intro__inner {
+		padding-top: 0
+	}
+	
+	.intro__content-desktop {
+		display: none
+	}
+	
+	.intro__content-mobile {
+		background: $color__white
+		border-radius: 5px
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+		display: block
+		margin: 0 auto
+		padding: 25px
+		position: relative
+		text-align: left
+		width: 90%
+	}
+
+	.intro__content-mobile-incompatible {
+		display: none
+		margin: 20px auto 0
+		width: 80%
+
+		a {
+			text-decoration: none
+		}
+	}
+
+	.intro__content-mobile-header {
+		color: #58595b
+		line-height: 1.4
+	}
+
+	.intro__content-mobile-body {
+		color: #828386
+	}
+
+	.intro__content-mobile-ok {
+		margin-bottom: 0
+		text-align: right
+	}
+
+	.intro__content-mobile-ok-link {
+		display: inline-block
+		padding: 10px 20px
+		margin-right: -10px
+		text-decoration: none
+	}
+
+	.intro__text {
+		font-size: 14px
+	}
+
+	.intro__button-social {
+
+		& + & {
+			margin-left: 10px
+		}
+	}
+
+	.wizard__launch-skip {
+		font-size: 14px
+	}
+
+	.intro__title {
+		height: 70px
+		margin-bottom: space(1)
+		margin-top: 0
+	}
+
+	.intro__cta {
+		margin-top: space(2)
+	}
+
+	.intro__footer-link--left {
+		width: 50%
+	}
+
+	.intro__title-image {
+		height: 70px
+		margin: 0 auto
+		max-width: 280px
+		width: 60%
+
+		&.intro__title-image--desktop {
+			display: none
+		}
+
+		&.intro__title-image--mobile {
+			display: block
+			width: 100%
+		}
+	}
+
+	.intro__title-image--teachable,
+	.intro__title-image--machine {
+		margin-right: 0
+		max-width: 80%
+		height: 30px
+	}
+}
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+
+	.intro__inner {
+		margin-top: -20px
+		padding-bottom: 10px
+	}
+
+	.intro__title {
+		height: 50px
+	}
+
+	.intro__title-image {
+		height: 50px
+	}
+
+	.intro__content-mobile {
+		width: 80%
+	}
+
+	.intro__content-mobile-ok {
+		margin-top: -10px
+	}
+
+	.intro__content-mobile-header {
+		font-size: 14px
+	}
+
+	.intro__content-mobile-body {
+		font-size: 12px
+	}
+
+	.intro__footer {
+		padding: 5px 20px
+	}
+
+	.intro__footer-link--left {
+		width: 25%
+	}
+}
+	

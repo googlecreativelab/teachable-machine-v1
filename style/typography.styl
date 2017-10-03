@@ -1,0 +1,56 @@
+$font = 'Poppins', sans-serif
+
+.font__weight--regular {
+	font-weight: 400
+}
+
+.font__weight--medium {
+	font-weight: 500
+}
+
+.font__weight--semi-bold {
+	font-weight: 600
+}
+
+.font__weight--bold {
+	font-weight: 700
+}
+
+.font__size--xsmall {
+	font-size: 11px
+}
+
+.font__size--small {
+	font-size: 14px
+}
+
+.font__size--normal {
+	font-size: 16px
+}
+
+.font__size--large {
+	font-size: 18px
+}
+
+.font__size--xlarge {
+	font-size: 24px
+}
+
+.font__size--xxlarge {
+	font-size: 30px
+}
+
+.uppercase {
+	text-transform: uppercase
+}
+
+html, body, input {
+	font-family: $font	
+	@extend .font__weight--regular
+	@extend .font__size--normal
+}
+
+h1, h2, h3, h4 {
+	margin: 0
+	@extend .font__weight--medium
+}

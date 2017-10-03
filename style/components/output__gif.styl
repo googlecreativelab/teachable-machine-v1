@@ -1,0 +1,258 @@
+.gif__viewer {
+	position: relative
+	width: 100%
+	height: 100%
+	background-color: $color__background
+	background-position: center center
+	background-size: cover
+	background-repeat: no-repeat
+	
+	@extend .font__size--small
+}
+
+.gif__edit {
+	position: relative
+	width: 100%
+	height: 100%
+}
+
+.gif__edit-bar {
+	width: 100%
+	height: 80px
+	bottom: 0px
+	position: absolute
+	background: $color__white
+	display: flex
+	justify-content: center
+}
+
+.gif__thumb {
+	position: relative
+	width: 70px
+	height: 70px
+	cursor: pointer
+	margin: space(1) space(1) 0 space(1)
+}
+
+.gif__thumb-image-wrapper {
+	position: relative
+	overflow: hidden
+	width: 80%
+	height: 80%
+	background: $color__black
+	top: 50%
+	left: 50%
+	transform: translate3d(-50%, -50%, 0)
+	background-position: center center
+	background-size: cover
+	background-repeat: no-repeat
+}
+
+.gif__thumb-image-wrapper:after {
+	content: " "
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	background-color: rgba($color__black, 0.6)
+	background-image: url(assets/edit-icon.svg)
+	background-repeat: no-repeat
+	background-size: 40%
+	background-position: center center
+	display: none
+}
+
+.gif__thumb-border {
+	position: absolute
+	width: 100%
+	height: 100%
+	border-width: 4px
+	border-style: solid
+	opacity: 1
+}
+
+.gif__thumb:hover .gif__thumb-image-wrapper:after {
+	display: block
+}
+
+.gif__thumb-border--green {
+	border-color: rgba($color__class-green--primary, 0.2)
+}
+
+.gif__thumb-border--purple {
+	border-color: rgba($color__class-purple--primary, 0.2)
+}
+
+.gif__thumb-border--orange {
+	border-color: rgba($color__class-orange--primary, 0.2)
+}
+
+.gif__thumb:hover .gif__thumb-border--green, .gif__thumb-border--green-selected {
+	border-color: $color__class-green--primary
+}
+
+.gif__thumb:hover .gif__thumb-border--purple, .gif__thumb-border--purple-selected {
+	border-color: $color__class-purple--primary
+}
+
+.gif__thumb:hover .gif__thumb-border--orange, .gif__thumb-border--orange-selected {
+	border-color: $color__class-orange--primary
+}
+
+
+.gif__edit-viewer {
+	width: 100%
+	position: absolute
+	bottom: 80px
+	top: 0px
+	background-color: $color__background
+	background-position: center center
+	background-size: cover
+	background-repeat: no-repeat
+}
+
+.gif__canvas {
+	width: 100%
+	height: 100%
+
+	canvas {
+		width: 340px
+		height: 260px
+	}
+}
+
+.gif__search {
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+}
+
+.gif__search-bar {
+	position: absolute
+	width: 100%
+	height: 80px
+	background-color: $color__white
+}
+
+.gif__search-input {
+	width: 100%
+	height: 70px
+	border: 4px solid $color__grey--primary
+	padding-left: 60px
+	outline: none
+	
+	@extend .font__size--small
+}
+
+.gif__search-input--a {
+	color: $color__class-a--primary
+}
+
+.gif__search-input--b {
+	color: $color__class-b--primary
+}
+
+.gif__search-input--c {
+	color: $color__class-c--primary
+}
+
+.gif__search-input--d {
+	color: $color__class-d--primary
+}
+
+.gif__search-back-button {
+	left: 0
+	top: 0
+	width: 60px
+	height: 70px
+	position: absolute
+	background-color: transparent
+	cursor: pointer
+}
+// @stylint off
+.gif__search-back-button:after {
+	content: " "
+	position: absolute
+	left: 50%
+	top: 50%
+	transform: translate3d(-50%, -50%, 0)
+	width: 30px
+	height: 30px
+	background-image: url(assets/back-arrow.svg)
+	background-size: 30px
+	background-position: 0 0
+	background-repeat: no-repeat
+}
+
+.gif__search-back-button--a:after {
+	background-position-y: 0px
+}
+
+.gif__search-back-button--b:after {
+	background-position-y: -30px
+}
+
+.gif__search-back-button--c:after {
+	background-position-y: -60px
+}
+
+.gif__search-back-button--d:after {
+	background-position-y: -90px
+}
+
+.gif__search-sponsor {
+	width: 100%
+	height: 40px
+	background-image: url(assets/giphy.svg)
+	background-position: center center
+	background-size: 220px
+	background-repeat: no-repeat
+}
+
+.gif__search-scroll {
+	position: absolute
+	overflow: hidden
+	overflow-y: scroll
+	width: 100%
+	top: 80px
+	bottom: 0px
+	background-color: rgba($color__black, 0.9)
+}
+
+
+.gif__search-results {
+	display: flex
+	justify-content: space-around
+}
+
+.gif__search-column {
+	width: 50%
+}
+
+.gif__search-column:first-of-type {
+	padding-left: space(1)
+	padding-right: space(0.5)
+}
+
+.gif__search-column:last-of-type {
+	padding-left: space(0.5)
+	padding-right: space(1)
+}
+
+.gif__search-column img {
+	width: 100%
+	display: block
+	margin-bottom: space(1)
+	cursor: pointer
+}
+
+.gif__load-more {
+	color: $color__white
+	opacity: 0
+	cursor: pointer
+	padding-top: space(1)
+	padding-bottom: space(1)
+}
