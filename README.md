@@ -10,15 +10,14 @@ The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/de
 yarn
 ```
 
-#### Start local server by running 
-```
-yarn run watch
-```
-
-
 #### Build project
 ```
 yarn build
+```
+
+#### Start local server by running 
+```
+yarn run watch
 ```
 
 #### Code Styles
