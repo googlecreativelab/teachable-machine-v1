@@ -371,6 +371,7 @@ this.steps.push({
         event: () => {
             this.setText('');
             this.skip();
+            gtag('event', 'wizard_finish');            
         }
     }
     ]
@@ -675,6 +676,7 @@ start() {
     this.play(0);
     this.startAudioTimer();
     GLOBALS.launchScreen.destroy();
+    gtag('event', 'wizard_start');        
 }
 
 startCamera() {
@@ -684,6 +686,7 @@ startCamera() {
 skip(event) {
     if (event) {
         event.preventDefault();
+        gtag('event', 'wizard_skip_mid');        
     }
 
     if (this.wizardRunning) {

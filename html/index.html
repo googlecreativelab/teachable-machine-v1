@@ -241,7 +241,7 @@
     </div>
     <div class="recording__inner">
         <p class="message" id="message">Record a 10-second video clip. You can use your mic to say something about it.</p>
-        <p class="restart" id="message-alt">Share your video below,<br> or <a href="#" class="restart" id="restart">redo it</a>.</p>
+        <p class="restart" id="message-alt">Share your video below, or <a href="#" class="restart" id="restart">redo it</a>.</p>
         <canvas id="recording__canvas" class="recording__canvas"></canvas>
         <video id="recording__video" width="680" height="340" autoplay loop controls></video>
         <p class="record__timer" id="record__timer">0:10</p>
@@ -258,6 +258,9 @@
                     <span id="icon--share" class="icon icon--share"></span>Post to Facebook
                 </span>
             </a>
+            <p class="recording-download-container"><span id="pre-download-message">or, </span><a
+                    id="recording__download"
+                                                                         class="recording__download">Download it!</a></p>
             <div id="recording__legal">
                 <label><input id="recording__checkbox" type="checkbox">By checking this box I certify that I am over 13 years old</label>
             </div>
@@ -272,7 +275,7 @@
         </div>
         <div class="faq__inner">
             <h3 class="faq__question">What is this?</h3>
-            <p class="faq__answer">This experiment lets anyone explore how machine learning works, in a fun, hands-on way. You can teach a machine to using your camera, live in the browser – no coding required. Watch this video to learn more:
+            <p class="faq__answer">This experiment lets anyone explore how machine learning works, in a fun, hands-on way. You can teach a machine to using your camera, live in the browser – no coding required. You train a <a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">neural network</a> locally on your device, without sending any images to a server. That’s how it responds so quickly to you. Watch this video to learn more:
                 <iframe class="faq__video" width="424" height="238" src="https://www.youtube.com/embed/3BhkeY974Rg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
             </p>
             <h3 class="faq__question">What kind of things can I do?</h3>
@@ -283,10 +286,12 @@
             <p class="faq__answer">Don’t worry. Keep playing around. Seeing what works and what doesn’t is one way to explore how machine learning works. Keep in mind that your machine doesn’t have an understanding of higher level concepts, like faces or objects. It’s learning through the examples you give it. So if it’s not working the way you want, you might want to click the x to reset your classes and try out different approaches.</p>
             <h3 class="faq__question">Where can I find more things like this?</h3>
             <p class="faq__answer">Check out <a href="http://www.wekinator.org/" target="_blank" class="link">Wekinator</a> by Rebecca Fiebrink, one of the inspirations for this project. It lets anyone use machine learning through simple actions instead of code. <a href="http://ml4a.github.io/guides/" target="_blank" class="link">Here</a> are some interactive guides for learning about machine learning. And check out other fun projects like <a href="https://experiments.withgoogle.com/ai/objectifier-spatial-programming" target="_blank" class="link">this</a> and <a href="https://experiments.withgoogle.com/ai/giorgio-cam/view/" target="_blank" class="link">this</a>.</p>
+            <h3 class="faq__question">Are my images being stored on Google servers?</h3>
+            <p class="faq__answer">No. All the training is happening locally on your device.</p>
             <h3 class="faq__question">How do I learn more about machine learning?</h3>
             <p class="faq__answer"><a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">Here’s</a> an intro-level video explainer. <a href="http://playground.tensorflow.org" target="_blank" class="link">This</a> site lets you interact with neural networks in more detail. And this <a href="https://www.kadenze.com/courses/machine-learning-for-musicians-and-artists/info" target="_blank" class="link">free online course</a> lets you dive in even deeper.</p>
             <h3 class="faq__question">How was this built?</h3>
-            <p class="faq__answer">The image recognition is powered by a <a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">neural network</a>. It uses the open-source library <a href="https://pair-code.github.io/deeplearnjs/" target="_blank" class="link">deeplearn.js</a>, which allows web developers to run machine learning models locally in the browser. That’s how your machine responds so quickly. We’ve also open-sourced the experiment <a href="https://github.com/googlecreativelab/teachable-machine" target="_blank" class="link">here on Github</a>.</p>
+            <p class="faq__answer">The image recognition is powered by a <a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">neural network</a>. It uses the open-source library <a href="https://pair-code.github.io/deeplearnjs/" target="_blank" class="link">deeplearn.js</a>, which allows web developers to run machine learning models locally in the browser. We’ve also open-sourced the experiment <a href="https://github.com/googlecreativelab/teachable-machine" target="_blank" class="link">here on Github</a>.</p>
             <h3 class="faq__question">Who made this?</h3>
             <p class="faq__answer">This experiment was a collaborative effort by friends from <a href="http://stoj.io" target="_blank" class="link">Støj</a>, <a href="https://useallfive.com/" target="_blank" class="link">Use All Five</a> and Creative Lab and PAIR teams at Google.</p>
         </div>

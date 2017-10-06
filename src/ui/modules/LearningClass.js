@@ -164,6 +164,8 @@ class LearningClass {
 		setTimeout(() => {
 			GLOBALS.webcamClassifier.buttonDown(this.id, this.canvas, this);
 		}, 100);
+
+		gtag('event', 'training', {'id': this.index});
 	}
 
 	buttonUp() {

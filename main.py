@@ -35,7 +35,8 @@ class ShareVideo(webapp2.RequestHandler):
                     video = self.request.POST.get('video')
                     url = 'https://graph-video.facebook.com/v2.10/me/videos'
                     query = {
-                        'access_token': accessToken
+                        'access_token': accessToken,
+                        'description': 'I just trained my own neural net! Explore machine learning with #teachablemachine: http://g.co/teachablemachine'
                     }
                     files = {
                         'source': (video.filename, video.file, video.type)

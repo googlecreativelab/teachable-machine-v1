@@ -130,6 +130,25 @@ class WebcamClassifier {
         this.video.srcObject = stream;
         this.squeezeNet = new SqueezeNet(this.gpgpu, this.math, this.useFloatTextures);
         this.squeezeNet.loadVariables().then(() => {
+          this.math.scope(() => {
+            const warmupInput = Array3D.zeros(
+              [
+              IMAGE_SIZE,
+              IMAGE_SIZE,
+              3
+              ]
+            );
+            // Warmup
+            const inferenceResult = this.squeezeNet.infer(warmupInput);
+      
+            for (const key in inferenceResult.namedActivations) {
+              if (key in inferenceResult.namedActivations) {
+                this.math.track(inferenceResult.namedActivations[key]);
+              }
+            }
+            this.math.track(inferenceResult.logits);
+          });
+
           this.loaded = true;
           this.wasActive = true;
           this.startTimer();
@@ -137,6 +156,7 @@ class WebcamClassifier {
 
         let event = new CustomEvent('webcam-status', {detail: {granted: true}});
         window.dispatchEvent(event);
+        gtag('event', 'webcam_granted');        
       }).
       catch((error) => {
         let event = new CustomEvent('webcam-status', {
@@ -147,6 +167,7 @@ class WebcamClassifier {
         });
         this.activateWebcamButton.style.display = 'block';
         window.dispatchEvent(event);
+        gtag('event', 'webcam_denied');
       });
     }
   }
@@ -434,7 +455,7 @@ class WebcamClassifier {
   }
 }
 
-import {GPGPUContext, NDArrayMathCPU, NDArrayMathGPU, Array1D, Array2D, NDArray, gpgpu_util, util, Scalar, Environment, environment, ENV}from 'deeplearn';
+import {GPGPUContext, NDArrayMathCPU, NDArrayMathGPU, Array1D, Array2D, Array3D, NDArray, gpgpu_util, util, Scalar, Environment, environment, ENV}from 'deeplearn';
 
 import GLOBALS from './../config.js';
 import SqueezeNet from './squeezenet';

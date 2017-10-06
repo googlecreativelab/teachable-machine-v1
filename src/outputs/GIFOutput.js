@@ -293,12 +293,14 @@ class GIFOutput {
 
 	showAnimation(url) {
 		if (this.gifCanvas) {
+            GLOBALS.isRecording = true;
 			this.gifCanvas.setSource(url);
 		}
 	}
 
 	stopAnimation() {
 		if (this.gifCanvas) {
+            GLOBALS.isRecording = false;
 			this.gifCanvas.clear();
 		}
 	}

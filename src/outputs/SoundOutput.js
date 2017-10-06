@@ -315,6 +315,9 @@ class SoundOutput {
 	}
 
 	updateCanvas(colorId, sound) {
+        if (sound === 'null') {
+            this.sound = ' ';
+        }
 		let color = '#2baa5e';
 		switch (colorId) {
 			case 0:

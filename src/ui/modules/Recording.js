@@ -18,6 +18,9 @@ class Recording {
         this.element = element;
         this.canvas = element.querySelector('#recording__canvas');
         this.startButtonText = element.querySelector('#recording__start-text');
+        this.downloadPreText = element.querySelector('#pre-download-message');
+        this.downloadLinkSection = element.querySelector('.recording-download-container');
+        this.downloadLinkButton = element.querySelector('#recording__download');
         this.recordingVideo = element.querySelector('#recording__video');
         this.recordTimer = element.querySelector('#record__timer');
         this.closeButton = element.querySelector('#close__button');
@@ -25,6 +28,9 @@ class Recording {
         this.restart = element.querySelector('#restart');
         this.recordMessage = element.querySelector('#message');
         this.recordMessageAlt = element.querySelector('#message-alt');
+        this.downloadLinkSection.style.display = 'none';
+
+        this.sendSuccess = false;
 
         this.legal = document.querySelector('#recording__legal');
         this.checkbox = document.querySelector('#recording__checkbox');
@@ -74,7 +80,6 @@ class Recording {
         document.querySelector('#recording__start-button .button__label #icon--stop').style.display = 'none';
         this.sourceCanvas = element;
         this.context = this.canvas.getContext('2d');
-        GLOBALS.isRecording = true;
         this.showing = true;
         this.render();
 
@@ -220,12 +225,7 @@ class Recording {
             break;
             case 'successMessage':
             this.shareButton.element.style.display = 'none';
-            this.startButton.element.style.display = 'inline-block';
-            document.querySelector('#recording__start-button .button__label #recording__start-text').innerText = 'Success!';
-            this.recordingState = 'close';
-            break;
-            case 'close':
-            this.hide();
+            this.recordingState = 'waiting';
             break;
             default:
             break;
@@ -233,9 +233,10 @@ class Recording {
     }
 
     onShareButtonClick() {
+        this.shareButton.element.style.display = 'none';
+        this.recordingState = 'waiting';
         this.shareOnFb();
-        this.recordingState = 'successMessage';
-        this.onRecordButtonClick();
+        this.downloadLinkSection.style.marginLeft = 0;
     }
 
 
@@ -243,11 +244,13 @@ class Recording {
         this.recordingState = 'waiting';
         this.recordTimer.style.display = 'block';
         this.startButton.element.style.top = 0;
+        this.downloadLinkSection.style.marginLeft = '15px';
         this.recordMessage.style.display = 'block';
         this.recordMessageAlt.style.display = 'none';
         this.startButton.element.style.display = 'inline-block';
         this.legal.style.display = 'block';
         this.shareButton.element.style.display = 'none';
+        this.downloadLinkSection.style.display = 'none';
         document.querySelector('#recording__start-button .button__label #icon--stop').style.display = 'none';
         document.querySelector('#recording__start-button .button__label #icon--record').style.display = 'inline-block';
         document.querySelector('#recording__start-button .button__label #recording__start-text').innerText = 'Start Recording';
@@ -255,12 +258,14 @@ class Recording {
         this.recordingVideo.style.display = 'none';
         this.stopRecordingTime();
         this.stopCountdown();
+        this.downloadPreText.innerText = 'or, ';
     }
 
     countdown() {
         this.recordingState = 'countdown';
         this.canvas.style.display = 'block';
         this.recordingVideo.style.display = 'none';
+        this.downloadLinkSection.style.display = 'none';
         document.querySelector('#recording__start-button .button__label #icon--record').style.display = 'none';
         document.querySelector('#recording__start-button .button__label #recording__start-text').innerText = this.count;
         this.countdownTimeout = setTimeout(() => {
@@ -336,6 +341,9 @@ class Recording {
             this.startButton.element.style.top = '50px';
             document.querySelector('#recording__start-button .button__label #icon--stop').style.display = 'none';
             document.querySelector('#recording__start-button .button__label #recording__start-text').innerText = '';
+            this.downloadLinkSection.style.display = 'inline-block';
+            this.downloadLinkButton.href = url;
+            this.downloadLinkButton.download = 'teachable-machine.webm';
             this.startButton.element.style.display = 'none';
             this.legal.style.display = 'none';
             this.shareButton.element.style.display = 'inline-block';
@@ -348,6 +356,7 @@ class Recording {
         },
         this.RECORD_TIME
         );
+        gtag('event', 'recording_start');
     }
 
     show() {
@@ -380,7 +389,7 @@ class Recording {
     }
 
     shareOnFb() {
-
+        this.downloadPreText.innerText = 'Posting... ';
         window.fbWindowCallback = (data) => {
             let formData = new FormData();
             formData.append('code', data);
@@ -390,17 +399,20 @@ class Recording {
 
             let xhr = new XMLHttpRequest();
             xhr.open('POST', '/share-video');
-            xhr.onload = function() {
+            xhr.onload = () => {
                 if (xhr.status === 200) {
-                    console.log('Something went wrong.  Name is now ' + xhr.responseText);
+                    this.downloadPreText.innerText = 'Posted to Facebook. ';
+                    // console.log('Something went wrong.  Name is now ' + xhr.responseText);
                 }else if (xhr.status !== 200) {
-                    console.log('Request failed.  Returned status of ' + xhr.status);
+                    this.downloadPreText.innerText = 'Sorry, something went wrong. ';
+                    // console.log('Request failed.  Returned status of ' + xhr.status);
                 }
             };
             xhr.send(formData);
         };
         let popup = window.open('/fb', 'Share on Facebook', 'width=600, height=600');
         popup.focus();
+        gtag('event', 'recording_share');
     }
 }
 
