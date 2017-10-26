@@ -15,7 +15,7 @@
 /* eslint-disable camelcase, max-lines */
 const IMAGE_SIZE = 227;
 const INPUT_SIZE = 1000;
-const TOPK = 10;
+const TOPK = 20;
 const CLASS_COUNT = 3;
 
 const MEASURE_TIMING_EVERY_NUM_FRAMES = 20;
@@ -348,8 +348,9 @@ class WebcamClassifier {
         const topK = this.mathCPU.topK(knn, kVal);
         knn.dispose();
 
+        //These are the indices of the topK (sorted first by class and then the order in which they were taken)
         const indices = topK.indices.getValues();
-
+        
         const classTopKMap =
         [
         0,
@@ -360,11 +361,15 @@ class WebcamClassifier {
           classTopKMap[this.getClassFromIndex(indices[index])] += 1;
         }
 
+        let nCounts = [0, 0, 0];
         let confidences = [];
         for (let index = 0; index < CLASS_COUNT; index += 1) {
+          nCounts[index] = classTopKMap[index];
           const probability = classTopKMap[index] / kVal;
           confidences[index] = probability;
         }
+        console.log("Number of the top "+TOPK+" closest matches in each class: "+nCounts);
+        console.log("Confidence for which the image matches each class: "+confidences);
 
         GLOBALS.learningSection.setConfidences(confidences);
 
