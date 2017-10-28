@@ -21,6 +21,12 @@ const CLASS_COUNT = 3;
 const MEASURE_TIMING_EVERY_NUM_FRAMES = 20;
 
 
+function onSpecialButtonClick() {
+  window.alert('hi there');
+}
+
+
+
 function passThrough() {
   return 0;
 }
@@ -93,6 +99,9 @@ class WebcamClassifier {
         location.reload();
       });
     }
+
+    document.getElementById('specialButton').addEventListener('click', onSpecialButtonClick);
+
   }
 
   deleteClassData(index) {
