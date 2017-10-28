@@ -20,14 +20,16 @@ const CLASS_COUNT = 3;
 
 const MEASURE_TIMING_EVERY_NUM_FRAMES = 20;
 
+var globConf = [0, 0, 0];
+
 
 function passThrough() {
   return 0;
 }
 
 function onSpecialButtonClick() {
-  window.alert('Pausing ...');
-  }
+  window.alert("Confidences for each class: "+globConf);
+}
 
 class WebcamClassifier {
   constructor() {
@@ -374,6 +376,8 @@ class WebcamClassifier {
           const probability = classTopKMap[index] / kVal;
           confidences[index] = probability;
         }
+
+        globConf = confidences;
  
         console.log("Number of examples trained: " + numExamples);
         console.log("Number of the top " + TOPK +  " closest matches in each class: " + nCounts);
