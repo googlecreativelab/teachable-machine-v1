@@ -25,6 +25,10 @@ function passThrough() {
   return 0;
 }
 
+function onSpecialButtonClick() {
+  window.alert('Pausing ...');
+  }
+
 class WebcamClassifier {
   constructor() {
     this.loaded = false;
@@ -93,6 +97,8 @@ class WebcamClassifier {
         location.reload();
       });
     }
+    
+    document.getElementById('specialButton').addEventListener('click', onSpecialButtonClick);
   }
 
   deleteClassData(index) {
@@ -368,8 +374,10 @@ class WebcamClassifier {
           const probability = classTopKMap[index] / kVal;
           confidences[index] = probability;
         }
-        console.log("Number of the top "+TOPK+" closest matches in each class: "+nCounts);
-        console.log("Confidence for which the image matches each class: "+confidences);
+ 
+        console.log("Number of examples trained: " + numExamples);
+        console.log("Number of the top " + TOPK +  " closest matches in each class: " + nCounts);
+        console.log("Confidence for which the image matches each class: " + confidences);
 
         GLOBALS.learningSection.setConfidences(confidences);
 
