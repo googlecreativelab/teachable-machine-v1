@@ -28,7 +28,8 @@ function passThrough() {
 }
 
 function onSpecialButtonClick() {
-  window.alert("Confidences for each class: "+globConf);
+  //REMOVE THE LINE BELOW FOR THE PSET. THIS FUNCTION SHOULD BE EMPTY
+  window.alert('Confidences for each class: ' + globConf);
 }
 
 class WebcamClassifier {
@@ -379,9 +380,9 @@ class WebcamClassifier {
 
         globConf = confidences;
  
-        console.log("Number of examples trained: " + numExamples);
-        console.log("Number of the top " + TOPK +  " closest matches in each class: " + nCounts);
-        console.log("Confidence for which the image matches each class: " + confidences);
+        console.log('Number of examples trained: ' + numExamples);
+        console.log('Number of the top ' + TOPK +  ' closest matches in each class: ' + nCounts);
+        console.log('Confidence for which the image matches each class: ' + confidences);
 
         GLOBALS.learningSection.setConfidences(confidences);
 
