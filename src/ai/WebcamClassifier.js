@@ -20,7 +20,11 @@ const CLASS_COUNT = 3;
 
 const MEASURE_TIMING_EVERY_NUM_FRAMES = 20;
 
+// The following global variables are available for use in onSpcialButtonClick:
+// confidences for each class
 var globConf = [0, 0, 0];
+// number of TOPK images in each class
+var globNCounts = [0, 0, 0] ;
 
 
 function passThrough() {
@@ -29,7 +33,8 @@ function passThrough() {
 
 function onSpecialButtonClick() {
   //REMOVE THE LINE BELOW FOR THE PSET. THIS FUNCTION SHOULD BE EMPTY
-  window.alert('Confidences for each class: ' + globConf);
+  window.alert('Confidences for each class: ' + globConf 
+	       + '\n Number of the top ' + TOPK +  ' closest matches in each class: ' + globNCounts);
 }
 
 class WebcamClassifier {
@@ -352,6 +357,7 @@ class WebcamClassifier {
       });
 
       const computeConfidences = () => {
+	// comment these lines
         const values = knn.getValues();
         const kVal = Math.min(TOPK, numExamples);
         const topK = this.mathCPU.topK(knn, kVal);
@@ -360,12 +366,8 @@ class WebcamClassifier {
         //These are the indices of the topK (sorted first by class and then the order in which they were taken)
         const indices = topK.indices.getValues();
         
-        const classTopKMap =
-        [
-        0,
-        0,
-        0
-        ];
+        const classTopKMap = [0, 0, 0];
+        
         for (let index = 0; index < indices.length; index += 1) {
           classTopKMap[this.getClassFromIndex(indices[index])] += 1;
         }
@@ -378,9 +380,10 @@ class WebcamClassifier {
           confidences[index] = probability;
         }
 
+	// set the global values to they can be used in onSpecialButtonClick
         globConf = confidences;
+	globNCounts = nCounts;
  
-        console.log('Number of examples trained: ' + numExamples);
         console.log('Number of the top ' + TOPK +  ' closest matches in each class: ' + nCounts);
         console.log('Confidence for which the image matches each class: ' + confidences);
 
