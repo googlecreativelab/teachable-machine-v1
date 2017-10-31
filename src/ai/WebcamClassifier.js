@@ -298,48 +298,70 @@ class WebcamClassifier {
         this.saveTrainingLogits(this.current.index);
       });
       
-      if (this.currentClass.index == 0 && this.current.imagesCount > 29){
-        window.alert('No more inputs to class 0 allowed. 30 input max.');
-        return;
+      //Limit classes 1 and 2 to 100 samples and limit class 3 to 1000 samples
+      var class1SampleSize = 100;
+      var class2SampleSize = 100;
+      var class3SampleSize = 1000;
+      if (this.currentClass.index == 0 && this.current.imagesCount > (class1SampleSize - 1)){
+        window.alert('No more inputs to class ' + this.currentClass.index + ' allowed. ' + class1SampleSize + ' input max.');
+        //force release the button
+        this.isDown = false;
         //need to restart timer
+        this.timer = requestAnimationFrame(this.animate.bind(this));
       }
-      
-      this.current.imagesCount += 1;
-      console.log('Current.ImagesCount ' + this.current.imagesCount); //total # images in class
-      console.log('currentClass.index ' + this.currentClass.index); //0, 1, 2
-
-      this.currentClass.setSamples(this.current.imagesCount);
-      if (this.current.latestThumbs.length > 8) {
-        this.current.latestThumbs.shift();
+      else if (this.currentClass.index == 1 && this.current.imagesCount > (class2SampleSize - 1)){
+        window.alert('No more inputs to class ' + this.currentClass.index + ' allowed. ' + class2SampleSize + ' input max.');
+        //force release the button
+        this.isDown = false;
+        //need to restart timer
+        this.timer = requestAnimationFrame(this.animate.bind(this));
       }
-      if (this.current.latestImages.length > 8) {
-        this.current.latestImages.shift();
+      else if (this.currentClass.index == 2 && this.current.imagesCount > (class3SampleSize - 1)){
+        window.alert('No more inputs to class ' + this.currentClass.index + ' allowed. ' + class3SampleSize + ' input max.');
+        //force release the button
+        this.isDown = false;
+        //need to restart timer
+        this.timer = requestAnimationFrame(this.animate.bind(this));
       }
+      else{
+        this.current.imagesCount += 1;
+        console.log('Current.ImagesCount ' + this.current.imagesCount); //total # images in class
+        console.log('currentClass.index ' + this.currentClass.index); //0, 1, 2
 
-      this.thumbContext.drawImage(
-        this.video, this.thumbVideoX, 0, this.thumbVideoWidthReal,
-        this.thumbVideoHeight);
-      let data = this.thumbContext.getImageData(
-        0, 0, this.canvasWidth, this.canvasHeight);
-      this.current.latestThumbs.push(data);
-
-      let cols = 0;
-      let rows = 0;
-
-      for (let index = 0; index < this.current.latestThumbs.length; index += 1) {
-        this.currentContext.putImageData(
-          this.current.latestThumbs[index], (2 - cols) * this.thumbCanvas.width,
-          rows * this.thumbVideoHeight, 0, 0, this.thumbCanvas.width,
-          this.thumbCanvas.height);
-        if (cols === 2) {
-          rows += 1;
-          cols = 0;
-        }else {
-          cols += 1;
+        this.currentClass.setSamples(this.current.imagesCount);
+        if (this.current.latestThumbs.length > 8) {
+          this.current.latestThumbs.shift();
         }
+        if (this.current.latestImages.length > 8) {
+          this.current.latestImages.shift();
+        }
+
+        this.thumbContext.drawImage(
+          this.video, this.thumbVideoX, 0, this.thumbVideoWidthReal,
+          this.thumbVideoHeight);
+          let data = this.thumbContext.getImageData(
+          0, 0, this.canvasWidth, this.canvasHeight);
+        this.current.latestThumbs.push(data);
+
+        let cols = 0;
+        let rows = 0;
+
+        for (let index = 0; index < this.current.latestThumbs.length; index += 1) {
+          this.currentContext.putImageData(
+            this.current.latestThumbs[index], (2 - cols) * this.thumbCanvas.width,
+            rows * this.thumbVideoHeight, 0, 0, this.thumbCanvas.width,
+            this.thumbCanvas.height);
+          if (cols === 2) {
+            rows += 1;
+            cols = 0;
+          }else {
+            cols += 1;
+          }
+        }
+        this.timer = requestAnimationFrame(this.animate.bind(this));
       }
-      this.timer = requestAnimationFrame(this.animate.bind(this));
-    }else if (this.getNumExamples() > 0) {
+    }
+    else if (this.getNumExamples() > 0) {
       const numExamples = this.getNumExamples();
 
       let measureTimer = false;
@@ -415,7 +437,6 @@ class WebcamClassifier {
       this.timer = requestAnimationFrame(this.animate.bind(this));
     }
   }
-  
 
   getClassFromIndex(index) {
     let prevSum = 0;
