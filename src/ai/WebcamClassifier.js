@@ -297,8 +297,17 @@ class WebcamClassifier {
       this.math.scope(() => {
         this.saveTrainingLogits(this.current.index);
       });
-
+      
+      if (this.currentClass.index == 0 && this.current.imagesCount > 29){
+        window.alert('No more inputs to class 0 allowed. 30 input max.');
+        return;
+        //need to restart timer
+      }
+      
       this.current.imagesCount += 1;
+      console.log('Current.ImagesCount ' + this.current.imagesCount); //total # images in class
+      console.log('currentClass.index ' + this.currentClass.index); //0, 1, 2
+
       this.currentClass.setSamples(this.current.imagesCount);
       if (this.current.latestThumbs.length > 8) {
         this.current.latestThumbs.shift();
@@ -357,8 +366,7 @@ class WebcamClassifier {
       });
 
       const computeConfidences = () => {
-	// comment these lines
-        const values = knn.getValues();
+	    // comment these lines
         const kVal = Math.min(TOPK, numExamples);
         const topK = this.mathCPU.topK(knn, kVal);
         knn.dispose();
@@ -380,9 +388,9 @@ class WebcamClassifier {
           confidences[index] = probability;
         }
 
-	// set the global values to they can be used in onSpecialButtonClick
+	      // set the global values to they can be used in onSpecialButtonClick
         globConf = confidences;
-	globNCounts = nCounts;
+	      globNCounts = nCounts;
  
         console.log('Number of the top ' + TOPK +  ' closest matches in each class: ' + nCounts);
         console.log('Confidence for which the image matches each class: ' + confidences);
@@ -407,6 +415,7 @@ class WebcamClassifier {
       this.timer = requestAnimationFrame(this.animate.bind(this));
     }
   }
+  
 
   getClassFromIndex(index) {
     let prevSum = 0;
