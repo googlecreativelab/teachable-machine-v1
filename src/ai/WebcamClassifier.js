@@ -24,7 +24,7 @@ const MEASURE_TIMING_EVERY_NUM_FRAMES = 20;
 // confidences for each class
 var globConf = [0, 0, 0];
 // number of TOPK images in each class
-var globNCounts = [0, 0, 0] ;
+var globNCounts = [0, 0, 0];
 
 
 function passThrough() {
@@ -32,9 +32,7 @@ function passThrough() {
 }
 
 function onSpecialButtonClick() {
-  //REMOVE THE LINE BELOW FOR THE PSET. THIS FUNCTION SHOULD BE EMPTY
-  window.alert('Confidences for each class: ' + globConf 
-	       + '\n Number of the top ' + TOPK +  ' closest matches in each class: ' + globNCounts);
+  // FILL IN ACTION HERE
 }
 
 class WebcamClassifier {
@@ -298,35 +296,9 @@ class WebcamClassifier {
         this.saveTrainingLogits(this.current.index);
       });
       
-      //Limit classes 1 and 2 to 100 samples and limit class 3 to 1000 samples
-      var class1SampleSize = 100;
-      var class2SampleSize = 100;
-      var class3SampleSize = 1000;
-      if (this.currentClass.index == 0 && this.current.imagesCount > (class1SampleSize - 1)){
-        window.alert('No more inputs to class ' + this.currentClass.index + ' allowed. ' + class1SampleSize + ' input max.');
-        //force release the button
-        this.isDown = false;
-        //need to restart timer
-        this.timer = requestAnimationFrame(this.animate.bind(this));
-      }
-      else if (this.currentClass.index == 1 && this.current.imagesCount > (class2SampleSize - 1)){
-        window.alert('No more inputs to class ' + this.currentClass.index + ' allowed. ' + class2SampleSize + ' input max.');
-        //force release the button
-        this.isDown = false;
-        //need to restart timer
-        this.timer = requestAnimationFrame(this.animate.bind(this));
-      }
-      else if (this.currentClass.index == 2 && this.current.imagesCount > (class3SampleSize - 1)){
-        window.alert('No more inputs to class ' + this.currentClass.index + ' allowed. ' + class3SampleSize + ' input max.');
-        //force release the button
-        this.isDown = false;
-        //need to restart timer
-        this.timer = requestAnimationFrame(this.animate.bind(this));
-      }
-      else{
         this.current.imagesCount += 1;
-        console.log('Current.ImagesCount ' + this.current.imagesCount); //total # images in class
-        console.log('currentClass.index ' + this.currentClass.index); //0, 1, 2
+        console.log('Current.ImagesCount ' + this.current.imagesCount); // total # images in class
+        console.log('currentClass.index ' + this.currentClass.index); // 0, 1, 2
 
         this.currentClass.setSamples(this.current.imagesCount);
         if (this.current.latestThumbs.length > 8) {
@@ -354,12 +326,11 @@ class WebcamClassifier {
           if (cols === 2) {
             rows += 1;
             cols = 0;
-          }else {
+          } else {
             cols += 1;
           }
         }
-        this.timer = requestAnimationFrame(this.animate.bind(this));
-      }
+        this.timer = requestAnimationFrame(this.animate.bind(this)); 
     }
     else if (this.getNumExamples() > 0) {
       const numExamples = this.getNumExamples();
@@ -393,7 +364,7 @@ class WebcamClassifier {
         const topK = this.mathCPU.topK(knn, kVal);
         knn.dispose();
 
-        //These are the indices of the topK (sorted first by class and then the order in which they were taken)
+        // These are the indices of the topK (sorted first by class and then the order in which they were taken)
         const indices = topK.indices.getValues();
         
         const classTopKMap = [0, 0, 0];
@@ -414,7 +385,7 @@ class WebcamClassifier {
         globConf = confidences;
 	      globNCounts = nCounts;
  
-        console.log('Number of the top ' + TOPK +  ' closest matches in each class: ' + nCounts);
+        console.log('Number of the top ' + TOPK + ' closest matches in each class: ' + nCounts);
         console.log('Confidence for which the image matches each class: ' + confidences);
 
         GLOBALS.learningSection.setConfidences(confidences);
