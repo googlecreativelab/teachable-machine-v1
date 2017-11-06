@@ -208,6 +208,7 @@ this.steps.push({
         startTime: 49.599999999999994,
         stopTime: 53.8,
         event: () => {
+            window.removeEventListener('class-trained', this.classTrainedEvent);            
             this.setText('You should now see the green bar and the cat GIF.');
         }
     },
