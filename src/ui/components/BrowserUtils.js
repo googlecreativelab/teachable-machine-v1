@@ -59,8 +59,36 @@ class BrowserUtils {
                 this.isCompatible = true;
             }
         }
-
+        if (this.isCompatible) {
+            this.isCompatible = this.webglSupport();
+        }
     }
+
+    webglSupport() {
+        var canvas;
+        var ctx;
+        var exts;
+        var support = false;
+
+        try {
+            canvas = document.createElement('canvas');
+            ctx = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            exts = ctx.getSupportedExtensions();
+        } catch (e) {
+            return support;
+        }
+
+        if (ctx !== undefined) {
+            support = true;
+        }
+
+        for (var i = -1, len = exts.length; ++i < len; ){
+            support = true;
+        }
+
+        canvas = undefined;
+        return support;
+    };
 
     getAndroidVersion() {
         let ua = (navigator.userAgent).toLowerCase();

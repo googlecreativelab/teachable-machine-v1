@@ -18,9 +18,10 @@ class OutputSection {
 
         const outputs = {
             GIFOutput: new GIFOutput(),
-            SoundOutput: new SoundOutput(),
+            SoundOutput: new SoundOutput(document.querySelector('#SoundOutput')),
             SpeechOutput: new SpeechOutput()
         };
+        GLOBALS.soundOutput = outputs.SoundOutput;
 
         this.classNames = GLOBALS.classNames;
         GLOBALS.predicting = true;
@@ -93,13 +94,20 @@ class OutputSection {
             this.currentOutput = this.outputs[outputId];
         }
 
-
         if (this.currentOutput) {
             this.outputContainer.appendChild(this.currentOutput.element);
             this.currentOutput.start();
         }
 
         gtag('event', 'select_output', {'id': outputId});
+    }
+
+    toggleSoundOutput(play) {
+        if (this.currentOutput.id === 'SoundOutput' && play) {
+            GLOBALS.soundOutput.playCurrentSound();
+        }else if (this.currentOutput.id === 'SoundOutput' && !play) {
+            GLOBALS.soundOutput.pauseCurrentSound();
+        }
     }
 
     startWizardMode() {

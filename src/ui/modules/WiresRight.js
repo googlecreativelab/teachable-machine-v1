@@ -47,8 +47,11 @@ class WiresRight {
         }
 
         window.addEventListener('resize', () => {
-            this.size();
-            this.bulbVert ? this.render() : this.renderAlt();
+            if (window.innerWidth <= 900) {
+                this.canvas.style.display = 'none';
+            }else {
+                this.canvas.style.display = 'block';
+            }
         });
 
         window.addEventListener('orientationchange', () => {
@@ -216,38 +219,16 @@ class WiresRight {
 
         // this element rotated in css and using height as width
         // if (window.innerWidth >= BREAKPOINT_DESKTOP) {
-            this.height = 450;
+        this.height = 450;
 
-            // remove offset on desktop
-            this.element.setAttribute('style', '');
+        // remove offset on desktop
+        this.element.setAttribute('style', '');
 
-            bulbs.forEach((bulb, index) => {
-                bulb.style.top = this.endY + (index * this.endSpace) + 'px';
-            });
+        bulbs.forEach((bulb, index) => {
+            bulb.style.top = this.endY + (index * this.endSpace) + 'px';
+        });
 
-            this.bulbVert = true;
-        // }else {
-        //     this.startSpace = (this.height) / 3.2;
-        //     this.endSpace = this.height / 5;
-        //     this.canvas.height = this.height + 100;
-        //     this.height = BREAKPOINT_MED;
-        //     this.bulbVert = false;
-        //     let bulbs = Array.from(document.getElementsByClassName('wires__bulb'));
-        //
-        //     let scale = Math.round(window.innerWidth / 550 * 100) / 100;
-        //     scale = (scale > 1) ? 1 : scale;
-        //     let offset = this.altOffset * scale;
-        //     let height = 60 * scale;
-        //     let bulbSize = 2.5 - scale;
-        //     let styles = `left: calc((-1 * (50% + 50px) + ${offset}px));
-        //     transform: rotate(90deg) translateY(-100vw) scale(${scale});
-        //     height: ${height}px`;
-        //     this.element.setAttribute('style', styles);
-        //     bulbs.forEach((bulb, index) => {
-        //         bulb.style.top = 190 + ((bulbs.length - 1 - index) * this.endSpace * 1.57) + 'px';
-        //         bulb.style.transform = 'scale(' + bulbSize + ')';
-        //     });
-        // }
+        this.bulbVert = true;
 
         this.startX = 0;
         this.startY = 190 + this.offsetY;

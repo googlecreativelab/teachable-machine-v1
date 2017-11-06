@@ -29,6 +29,7 @@ class Recording {
         this.recordMessage = element.querySelector('#message');
         this.recordMessageAlt = element.querySelector('#message-alt');
         this.downloadLinkSection.style.display = 'none';
+        this.sharingNotice = element.querySelector('#sharing-notice');
 
         this.sendSuccess = false;
 
@@ -255,6 +256,7 @@ class Recording {
         document.querySelector('#recording__start-button .button__label #icon--record').style.display = 'inline-block';
         document.querySelector('#recording__start-button .button__label #recording__start-text').innerText = 'Start Recording';
         this.canvas.style.display = 'block';
+        this.sharingNotice.style.display = 'none';
         this.recordingVideo.style.display = 'none';
         this.stopRecordingTime();
         this.stopCountdown();
@@ -349,6 +351,7 @@ class Recording {
             this.shareButton.element.style.display = 'inline-block';
             this.shareButton.element.style.top = '50px';
             this.recordingVideo.setAttribute('src', url);
+            this.sharingNotice.style.display = 'block';
         };
         setTimeout(() => {
             this.startButton.element.classList.remove('animate');

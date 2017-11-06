@@ -79,6 +79,7 @@ class SoundOutput {
 		this.search = new SoundSearch(options);
 		this.offScreen.appendChild(this.search.element);
 		this.inputClasses = [];
+        this.lastSound;
 
 		for (let index = 0; index < this.assets.length; index += 1) {
 			let sound = this.assets[index];
@@ -132,6 +133,7 @@ class SoundOutput {
 
 			deleteIcon.addEventListener('click', this.clearInput.bind(this));
 			input.addEventListener('click', this.editInput.bind(this));
+            document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this), false);
 			// speakerIcon.addEventListener('click', this.testSound.bind(this));
 			// this.inputClasses[index] = speakerIcon;
 			inputClass.input = input;
@@ -144,11 +146,33 @@ class SoundOutput {
 		this.buildCanvas();
 	}
 
+    handleVisibilityChange() {
+		if (this.currentSound === null) {
+            this.currentSound;
+		}else if (document.hidden) {
+            this.currentSound.pause();
+        }else {
+            this.currentSound.play();
+        }
+    }
+
+    playCurrentSound() {
+		if (this.currentSound) {
+			this.currentSound.play();
+		}
+	}
+
+    pauseCurrentSound() {
+		if (this.currentSound) {
+			this.currentSound.pause();
+		}
+    }
+
 	clearInput(event) {
 		if (this.currentSound === this.sounds[event.target.parentNode.sound]) {
 			this.currentSound.muted = true;
-			this.currentSound = null;
-			if (this.currentIcon) {
+            this.currentSound = null;
+            if (this.currentIcon) {
 				this.currentIcon.classList.remove('output__sound-speaker--active');
 				this.currentIcon = null;
 			}
@@ -166,6 +190,7 @@ class SoundOutput {
 	searchResultPlayClick(event) {
 		event.stopPropagation();
 		let sound = event.target.parentNode.value;
+		this.lastSound = sound;
 		this.playSound(sound);
 	}
 
@@ -226,14 +251,15 @@ class SoundOutput {
 				this.currentSound.muted = false;
 				this.currentSound.currentTime = 0;
 				this.currentSound.play();
+                this.lastSound = this.currentSound;
 			}
 		}
     }
 
     muteSounds() {
-        if (this.currentSound) {
+		if (this.currentSound) {
             this.currentSound.muted = true;
-        }
+		}
 	}
 
 	assetLoaded(event) {
@@ -253,39 +279,55 @@ class SoundOutput {
 	}
 
 	trigger(index) {
-		if (this.currentIndex !== index) {
-			this.currentIndex = index;
+        if (!GLOBALS.clearing) {
+            if (this.currentIndex !== index) {
+                this.currentIndex = index;
 
-			let sound = this.inputClasses[this.currentIndex].sound;
-			if (sound) {
-				this.playSound(sound);
-			}else {
-                this.muteSounds();
+                let sound = this.inputClasses[this.currentIndex].sound;
+                if (sound) {
+                    this.playSound(sound);
+                }else {
+                    this.muteSounds();
+                }
+
+                if (this.currentIcon) {
+                    this.currentIcon.classList.remove('output__sound-speaker--active');
+                }
+
+                if (this.currentBorder && this.currentClassName) {
+                    this.currentBorder.classList.remove(`output__sound-input--${this.currentClassName}-selected`);
+                }
+
+                let border = this.inputClasses[index].input;
+                let id = this.classNames[index];
+
+                this.currentClassName = id;
+                this.currentBorder = border;
+                this.currentBorder.classList.add(`output__sound-input--${this.currentClassName}-selected`);
+
+                this.currentIcon = this.inputClasses[this.currentIndex];
+                this.currentIcon.classList.add('output__sound-speaker--active');
+                if (this.canvas) {
+                    sound === null ? sound = '(nothing)' : sound;
+                    this.updateCanvas(this.currentIndex, sound);
+                }
+
             }
+        }
+        if (GLOBALS.clearing) {
+            if (this.currentIcon) {
+                this.currentIcon.classList.remove('output__sound-speaker--active');
+            }
+            if (this.currentBorder && this.currentClassName) {
+                this.currentBorder.classList.remove(`output__sound-input--${this.currentClassName}-selected`);
+            }
+            for (let index = 0; index < this.numAssets; index += 1) {
+                let id = this.assets[index];
+                this.sounds[id].pause();
+            }
+        }
+    }
 
-			if (this.currentIcon) {
-				this.currentIcon.classList.remove('output__sound-speaker--active');
-			}
-
-			if (this.currentBorder && this.currentClassName) {
-				this.currentBorder.classList.remove(`output__sound-input--${this.currentClassName}-selected`);
-			}
-
-			let border = this.inputClasses[index].input;
-			let id = this.classNames[index];
-
-			this.currentClassName = id;
-			this.currentBorder = border;
-			this.currentBorder.classList.add(`output__sound-input--${this.currentClassName}-selected`);
-
-			this.currentIcon = this.inputClasses[this.currentIndex];
-			this.currentIcon.classList.add('output__sound-speaker--active');
-			if (this.canvas) {
-				this.updateCanvas(this.currentIndex, sound);
-			}
-
-		}
-	}
 
 	stop() {
 		for (let index = 0; index < this.numAssets; index += 1) {
@@ -336,10 +378,10 @@ class SoundOutput {
 			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			this.context.fillStyle = 'rgb(255, 255, 255)';
 			this.context.fillRect(0, 0, 300, 300);
-			this.context.drawImage(this.canvasImage, 98, 50, 110, 110);
-            this.context.font = '20px Poppins';
+			this.context.drawImage(this.canvasImage, 105, 52, 95, 95);
+            this.context.font = '25px Poppins';
             this.context.fillStyle = '#000';
-            this.context.fillText(sound, (this.canvas.width / 2 - this.context.measureText(sound).width / 2) - 20, 210);
+            this.context.fillText(sound, (this.canvas.width / 2 - this.context.measureText(sound).width / 2) - 20, 207);
 			this.context.globalCompositeOperation = 'screen';
 			this.context.fillStyle = color;
 			this.context.fillRect(0, 0, 300, 300);

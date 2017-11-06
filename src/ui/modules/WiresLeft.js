@@ -28,12 +28,13 @@ class WiresLeft {
         this.wireOrange = this.element.querySelector('.wire-orange');
         this.context = this.canvas.getContext('2d');
         this.vertical = true;
-
         window.addEventListener('resize', () => {
-            this.size();
-            this.render();
+            if (window.innerWidth <= 900) {
+                this.canvas.style.display = 'none';
+            }else {
+                this.canvas.style.display = 'block';
+            }
         });
-
         this.currentAnimator = null;
         this.renderOnce = true;
         this.render();
@@ -145,6 +146,9 @@ class WiresLeft {
 
     size() {
         const BREAKPOINT_DESKTOP = 900;
+        if (window.innerWidth <= BREAKPOINT_DESKTOP) {
+            this.canvas.style.display = 'none';
+        }
 
         this.width = this.element.offsetWidth;
 
@@ -179,10 +183,6 @@ class WiresLeft {
                 color: GLOBALS.colors[id],
                 numParticles: 15
             };
-        }
-
-        if (window.innerWidth <= BREAKPOINT_DESKTOP) {
-            this.canvas.style.display = 'none';
         }
 
         this.renderOnce = true;

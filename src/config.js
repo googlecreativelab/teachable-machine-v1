@@ -54,7 +54,8 @@ let GLOBALS = {
 		'orange': false
 	},
 	numClasses: 3,
-	audioContext: new AudioContext()
+	audioContext: new AudioContext(),
+    isBackFacingCam: false
 };
 
 export default GLOBALS;

@@ -89,6 +89,10 @@
 	position: relative
 }
 
+.input__media__flip {
+	display: none
+}
+
 .input__camera-video {
 	display: block
 	position: absolute
@@ -477,6 +481,14 @@
 	}
 }
 
+@media screen and (max-width: 1200px) {
+
+	.machine__sections {
+		margin-left: space(2)
+		margin-right: space(2)
+	}
+}
+
 @media screen and (max-width: 900px) {
 
 	.examples {
@@ -499,7 +511,9 @@
 
 	.machine__sections {
 		display: block
-		margin-bottom: space(2)
+		// margin-bottom: space(2)
+		margin-left: 0
+		margin-right: 0
 	}
 
 	.section {
@@ -804,4 +818,13 @@
 		display: none
 	}
 
+	.input__media__flip {
+		background: transparent url(assets/camera-flip.svg) no-repeat center center
+		width: 70px
+		height: 62px
+		position: absolute
+		bottom: 20px
+		right: 20px
+		display: block
+	}
 }

@@ -116,6 +116,7 @@ class SpeechOutput {
     }
 
     editInput(event) {
+        event.target.parentNode.input.value = '';
         this.activeInput = event.target;
         let classId = this.activeInput.classId;
     }
@@ -172,41 +173,55 @@ class SpeechOutput {
     }
 
     trigger(index) {
-        if (this.currentIndex !== index) {
-            this.canTrigger = false;
-            this.currentIndex = index;
+        if (!GLOBALS.clearing) {
+            if (this.currentIndex !== index) {
+                this.canTrigger = false;
+                this.currentIndex = index;
 
-            if (this.currentIcon) {
-                this.currentIcon.classList.remove('output__speech-speaker--active');
+                if (this.currentIcon) {
+                    this.currentIcon.classList.remove('output__speech-speaker--active');
+                }
+
+                if (this.currentBorder && this.currentClassName) {
+                    this.currentBorder.classList.remove(`output__speech-input--${this.currentClassName}-selected`);
+                }
+
+                let border = this.inputClasses[index].input;
+                let id = this.classNames[index];
+
+                this.currentClassName = id;
+                this.currentBorder = border;
+                this.currentBorder.classList.add(`output__speech-input--${this.currentClassName}-selected`);
+
+                if (this.currentTTS) {
+                    this.textToSpeech.stop();
+                }
+
+                let icon = this.inputClasses[index].icon;
+                let sound = this.inputClasses[index].message;
+                if (sound) {
+                    this.currentIcon = icon;
+                    this.currentIcon.classList.add('output__speech-speaker--active');
+                    this.textToSpeech.say(sound, this.ttsEnded.bind(this));
+                    this.currentTTS = true;
+                }else {
+                    this.canTrigger = true;
+                }
+                if (this.canvas) {
+                    sound === null ? sound = '(nothing)' : sound;
+                    this.updateCanvas(this.currentIndex, sound);
+                }
             }
-
+        }
+        if (GLOBALS.clearing) {
             if (this.currentBorder && this.currentClassName) {
                 this.currentBorder.classList.remove(`output__speech-input--${this.currentClassName}-selected`);
             }
-
-            let border = this.inputClasses[index].input;
-            let id = this.classNames[index];
-
-            this.currentClassName = id;
-            this.currentBorder = border;
-            this.currentBorder.classList.add(`output__speech-input--${this.currentClassName}-selected`);
-
+            if (this.currentIcon) {
+                this.currentIcon.classList.remove('output__speech-speaker--active');
+            }
             if (this.currentTTS) {
                 this.textToSpeech.stop();
-            }
-
-            let icon = this.inputClasses[index].icon;
-            let sound = this.inputClasses[index].message;
-            if (sound) {
-                this.currentIcon = icon;
-                this.currentIcon.classList.add('output__speech-speaker--active');
-                this.textToSpeech.say(sound, this.ttsEnded.bind(this));
-                this.currentTTS = true;
-            }else {
-                this.canTrigger = true;
-            }
-            if (this.canvas) {
-                this.updateCanvas(this.currentIndex, sound);
             }
         }
     }
@@ -260,10 +275,10 @@ class SpeechOutput {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.context.fillStyle = 'rgb(255, 255, 255)';
             this.context.fillRect(0, 0, 300, 300);
-            this.context.drawImage(this.canvasImage, 98, 50, 110, 110);
-            this.context.font = '20px Poppins';
+            this.context.drawImage(this.canvasImage, 105, 52, 95, 95);
+            this.context.font = '25px Poppins';
             this.context.fillStyle = '#000';
-            this.context.fillText(sound, this.canvas.width / 2 - 21, 210);
+            this.context.fillText(sound, this.canvas.width / 2 - 21, 207);
             this.context.textAlign = 'center';
             this.context.globalCompositeOperation = 'screen';
             this.context.fillStyle = color;

@@ -96,6 +96,7 @@ class WebcamClassifier {
   }
 
   deleteClassData(index) {
+    GLOBALS.clearing = true;
     if (this.trainClassLogitsMatrices[index]) {
       this.trainClassLogitsMatrices[index].dispose();
       this.trainClassLogitsMatrices[index] = null;
@@ -106,15 +107,22 @@ class WebcamClassifier {
       this.images[this.classNames[index]].latestThumbs = [];
       this.images[this.classNames[index]].latestImages = [];
     }
+    setTimeout(() => {
+        GLOBALS.clearing = false;
+    }, 300);
   }
 
   ready() {
+    let video = true;
+    if (GLOBALS.browserUtils.isMobile) {
+      video = {facingMode: (GLOBALS.isBackFacingCam) ? 'environment' : 'user'};
+    }
     if (this.loaded) {
       this.startTimer();
     }else if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(
       {
-        video: true,
+        video: video,
         audio: (GLOBALS.browserUtils.isChrome && !GLOBALS.browserUtils.isMobile)
       }).
       then((stream) => {
@@ -128,31 +136,33 @@ class WebcamClassifier {
         this.stream = stream;
         this.video.addEventListener('loadedmetadata', this.videoLoaded.bind(this));
         this.video.srcObject = stream;
-        this.squeezeNet = new SqueezeNet(this.gpgpu, this.math, this.useFloatTextures);
-        this.squeezeNet.loadVariables().then(() => {
-          this.math.scope(() => {
-            const warmupInput = Array3D.zeros(
-              [
-              IMAGE_SIZE,
-              IMAGE_SIZE,
-              3
-              ]
-            );
-            // Warmup
-            const inferenceResult = this.squeezeNet.infer(warmupInput);
-      
-            for (const key in inferenceResult.namedActivations) {
-              if (key in inferenceResult.namedActivations) {
-                this.math.track(inferenceResult.namedActivations[key]);
-              }
-            }
-            this.math.track(inferenceResult.logits);
-          });
+        if (!this.squeezeNet) {
+          this.squeezeNet = new SqueezeNet(this.gpgpu, this.math, this.useFloatTextures);
+          this.squeezeNet.loadVariables().then(() => {
+            this.math.scope(() => {
+              const warmupInput = Array3D.zeros(
+                [
+                IMAGE_SIZE,
+                IMAGE_SIZE,
+                3
+                ]
+              );
+              // Warmup
+              const inferenceResult = this.squeezeNet.infer(warmupInput);
 
-          this.loaded = true;
-          this.wasActive = true;
-          this.startTimer();
-        });
+              for (const key in inferenceResult.namedActivations) {
+                if (key in inferenceResult.namedActivations) {
+                  this.math.track(inferenceResult.namedActivations[key]);
+                }
+              }
+              this.math.track(inferenceResult.logits);
+            });
+
+            this.loaded = true;
+            this.wasActive = true;
+            this.startTimer();
+          });
+        }
 
         let event = new CustomEvent('webcam-status', {detail: {granted: true}});
         window.dispatchEvent(event);
@@ -173,6 +183,7 @@ class WebcamClassifier {
   }
 
   videoLoaded() {
+    let flip = (GLOBALS.isBackFacingCam) ? 1 : -1;
     let videoRatio = this.video.videoWidth / this.video.videoHeight;
     let parent = this.video.parentNode; 
     let parentWidth = parent.offsetWidth;
@@ -180,11 +191,11 @@ class WebcamClassifier {
     let videoWidth = parentHeight * videoRatio;
     this.video.style.width = videoWidth + 'px';
     this.video.style.height = parentHeight + 'px';
-    this.video.style.transform = 'scaleX(-1) translate(50%, -50%)';
+    this.video.style.transform = 'scaleX(' + flip + ') translate(' + (50 * flip * -1) + '%, -50%)';
 
     // If video is taller:
     if (videoRatio < 1) {
-      this.video.style.transform = 'scale(-2, 2) translate(20%, -30%)';
+      this.video.style.transform = 'scale(' + (flip * 2) + ', 2) translate(' + (flip * 20 * -1) + '%, -30%)';
     }
   }
 

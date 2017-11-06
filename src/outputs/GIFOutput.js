@@ -260,21 +260,27 @@ class GIFOutput {
 	}
 
 	trigger(index) {
-		this.currentIndex = index;
+		if (!GLOBALS.clearing) {
+            this.currentIndex = index;
 
-		if (this.currentBorder && this.currentClassName) {
-			this.currentBorder.classList.remove(`gif__thumb-border--${this.currentClassName}-selected`);
+            if (this.currentBorder && this.currentClassName) {
+                this.currentBorder.classList.remove(`gif__thumb-border--${this.currentClassName}-selected`);
+            }
+
+            let border = this.borders[index];
+            let id = this.classNames[index];
+            this.currentBorder = border;
+            this.currentClassName = id;
+            this.currentBorder.classList.add(`gif__thumb-border--${this.currentClassName}-selected`);
+
+            let image = this.gifs[this.currentIndex].gif;
+            this.editViewer.style.backgroundImage = `url(${image})`;
+            this.showAnimation(image);
+        }
+
+        if (GLOBALS.clearing) {
+            this.currentBorder.classList.remove(`gif__thumb-border--${this.currentClassName}-selected`);
 		}
-
-		let border = this.borders[index];
-		let id = this.classNames[index];
-		this.currentBorder = border;
-		this.currentClassName = id;
-		this.currentBorder.classList.add(`gif__thumb-border--${this.currentClassName}-selected`);
-
-		let image = this.gifs[this.currentIndex].gif;
-		this.editViewer.style.backgroundImage = `url(${image})`;
-		this.showAnimation(image);
 	}
 
 	stop() {

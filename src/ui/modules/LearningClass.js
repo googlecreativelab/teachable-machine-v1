@@ -126,20 +126,21 @@ class LearningClass {
 		if (this.exampleCounter >= recommendedNumSamples && GLOBALS.classesTrained[this.id] === false) {
 			GLOBALS.classesTrained[this.id] = true;
 		}
-		
-	}	
+	}
 
 	setConfidence(percentage) {
-		// this.percentage = percentage;
-		// this.updatePercentage();
-		let that = this;
-		GLOBALS.recordSection.setMeters(this.id, percentage);
-		TweenMax.to(this, 0.5, {
-			percentage: percentage,
-			onUpdate: () => {
-				that.updatePercentage();
-			}
-		});
+		if (!GLOBALS.clearing) {
+            // this.percentage = percentage;
+            // this.updatePercentage();
+            let that = this;
+            GLOBALS.recordSection.setMeters(this.id, percentage);
+            TweenMax.to(this, 0.5, {
+                percentage: percentage,
+                onUpdate: () => {
+                    that.updatePercentage();
+                }
+            });
+        }
 	}
 
 	highlightConfidence() {
@@ -156,10 +157,12 @@ class LearningClass {
 		this.section.startRecording(this.index);
 
 		this.buttonUpEvent = this.buttonUp.bind(this);
-		window.addEventListener('mouseup', this.buttonUpEvent);
+		window.addEventListener('mouseup', this.buttonUpEvent.bind(this));
 
 		GLOBALS.recording = true;
 		GLOBALS.classId = this.id;
+
+        GLOBALS.outputSection.toggleSoundOutput(false);
 
 		setTimeout(() => {
 			GLOBALS.webcamClassifier.buttonDown(this.id, this.canvas, this);
@@ -169,12 +172,14 @@ class LearningClass {
 	}
 
 	buttonUp() {
-		this.button.setText(`Train ${this.id}`);
+		this.button.setText(`Train <br>${this.id}`);
 		this.section.stopRecording();
 		this.button.up();
 
 		GLOBALS.classId = null;
 		GLOBALS.recording = false;
+
+        GLOBALS.outputSection.toggleSoundOutput(true);
 
 		GLOBALS.webcamClassifier.buttonUp(this.id, this.canvas);
 

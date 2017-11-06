@@ -44,6 +44,9 @@ function init() {
 	GLOBALS.learningSection.ready();
 	GLOBALS.wizard = new Wizard();
 	GLOBALS.recordSection = new Recording(document.querySelector('#recording'));
+	if (localStorage.getItem('isBackFacingCam') && localStorage.getItem('isBackFacingCam') === 'true') {
+		GLOBALS.isBackFacingCam = true;
+	}
 }
 
 window.addEventListener('load', init);

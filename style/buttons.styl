@@ -57,6 +57,10 @@
 
 .button__label {
 	position: absolute
+
+	br {
+		display: none
+	}
 }
 
 // Colors
@@ -186,9 +190,26 @@
 	fill: $color__twitter--shadow-bottom
 }
 
-@media screen and (max-width: 900px) {
+.recording-share__button .button__label,
+.recording-start__button .button__label {
+	top: 8px !important
+}
 
+@media screen and (max-width: 900px) {
+	.button__label {
+
+		br {
+			display: block
+		}
+	}
+	.button__content--small {
+		position: relative
+		top: -6px
+	}
 	.button__color-title {
-		display: none
+		position: relative
+		top: -36px
+		display: block
+		pointer-events: none
 	}
 }

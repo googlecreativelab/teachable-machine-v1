@@ -67,6 +67,13 @@ class LaunchScreen {
             document.querySelector('.wizard__browser-warning').style.display = 'none';
         }
 
+        if (GLOBALS.browserUtils.isMobile) {
+            this.messageIsCompatible.style.display = 'block';
+
+        }else {
+            this.messageIsCompatible.style.display = 'none';
+        }
+
         if (GLOBALS.browserUtils.isMobile && !GLOBALS.browserUtils.isCompatible) {
             this.messageIsCompatible.style.display = 'none';
             this.messageIsNotCompatible.style.display = 'block';

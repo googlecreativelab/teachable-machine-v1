@@ -23,6 +23,8 @@ class InputSection {
         // this.micInputToggle.element.addEventListener('click', this.selectMicInput.bind(this));
         // this.camInputToggle.element.addEventListener('touchend', this.selectCamInput.bind(this));
         // this.micInputToggle.element.addEventListener('touchend', this.selectMicInput.bind(this));
+        this.mediaFlipButton = element.querySelector('.input__media__flip');
+        this.mediaFlipButton.addEventListener('click', this.flipCamera.bind(this));
 
         this.inputContainer = element.querySelector('.input__media');
 
@@ -199,6 +201,24 @@ class InputSection {
 
     resetClass(id) {
         this.camInput.resetClass(id);
+    }
+
+    flipCamera(event) {
+        event.preventDefault();
+        if (!GLOBALS.browserUtils.isAndroid) {
+            GLOBALS.isBackFacingCam = !GLOBALS.isBackFacingCam;
+            GLOBALS.webcamClassifier.loaded = false;
+            GLOBALS.webcamClassifier.ready();
+        }
+        if (GLOBALS.browserUtils.isAndroid) {
+            /*eslint-disable */
+            if (confirm('Switching camera will clear your trained classes and reload the page.')) {
+                /*eslint-enable */
+                GLOBALS.isBackFacingCam = !GLOBALS.isBackFacingCam;
+                localStorage.setItem('isBackFacingCam', GLOBALS.isBackFacingCam.toString());
+                location.reload();
+            }
+        }
     }
 }
 

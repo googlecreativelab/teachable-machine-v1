@@ -18,105 +18,9 @@ import GLOBALS from './../../config.js';
 class Button {
 
 	constructor(element) {
-		let textWidth = element.offsetWidth;
-		let textHeight = element.offsetHeight;
-		let depthX = GLOBALS.button.states.normal.x;
-		let depthY = GLOBALS.button.states.normal.y;
-
-		let depthXPressed = GLOBALS.button.states.pressed.x;
-		let depthYPressed = GLOBALS.button.states.pressed.y;
+		this.initialElement = element.innerHTML;
 
 		this.element = element;
-		if (element.classList.contains('button__toggle')) {
-			textWidth += 3.5;
-			this.isToggle = true;
-		}
-
-		if (element.classList.contains('button--large')) {
-			textHeight += 20;
-			textWidth += 20;
-		}
-
-		let frontWidth = textWidth + GLOBALS.button.padding;
-		let frontHeight = textHeight < GLOBALS.button.frontHeight ? GLOBALS.button.frontHeight : textHeight;
-
-		if (element.classList.contains('button--small')) {
-			textWidth = 36;
-			textHeight = 30;
-
-			frontWidth = textWidth;
-			frontHeight = textHeight;
-		}
-
-		frontWidth = textWidth - GLOBALS.button.states.normal.x;
-
-		let buttonWidth = frontWidth + GLOBALS.button.states.normal.x;
-		let buttonHeight = frontHeight + GLOBALS.button.states.normal.y;
-
-		var colorClass = 'grey';
-		element.classList.forEach(function(className) {
-			if (className.indexOf('button--color-') > -1) {
-				let index = className.indexOf('button--color-') + 'button--color-'.length;
-				colorClass = className.slice(index);
-			}
-		});
-
-		let buttonContent = element.children[0];
-		buttonContent.classList.remove('button__content');
-		let htmlContent = element.innerHTML;
-		element.innerHTML = '';
-
-		element.style.width = buttonWidth + 'px';
-		element.style.height = buttonHeight + 'px';
-
-
-		let mask = document.createElement('div');
-		mask.classList.add('button__mask');
-
-		let content = document.createElement('div');
-		content.classList.add('button__inner');
-
-
-		let label = document.createElement('div');
-		label.classList.add('button__label');
-		label.innerHTML = htmlContent;
-		label.style.width = frontWidth + 'px';
-		label.style.height = frontHeight + 'px';
-		label.style.lineHeight = frontHeight + 'px';
-		label.style.left = depthX + 'px';
-		content.appendChild(label);
-
-		this.label = label;
-
-		let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-		svg.setAttribute('width', buttonWidth);
-		svg.setAttribute('height', buttonHeight);
-		this.svg = svg;
-
-		let frontFace = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		frontFace.classList.add('front-face');
-		frontFace.classList.add('front-face--' + colorClass);
-		frontFace.setAttribute('d', `M${depthX} 0 ${frontWidth + depthX} 0 ${frontWidth + depthX} ${frontHeight} ${depthX} ${frontHeight}z`);
-		svg.appendChild(frontFace);
-		this.frontFace = frontFace;
-
-		let bottomFace = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		bottomFace.classList.add('bottom-face');
-		bottomFace.classList.add('bottom-face--' + colorClass);
-		bottomFace.setAttribute('d', `M${depthX} ${frontHeight} ${frontWidth + depthX} ${frontHeight} ${frontWidth} ${frontHeight + depthY} 0 ${frontHeight + depthY}z`);
-		svg.appendChild(bottomFace);
-		this.bottomFace = bottomFace;
-
-		let leftFace = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		leftFace.classList.add('left-face');
-		leftFace.classList.add('left-face--' + colorClass);
-		leftFace.setAttribute('d', `M0 ${depthY} ${depthX} 0 ${depthX} ${frontHeight} 0 ${frontHeight + depthY}z`);
-		svg.appendChild(leftFace);
-		this.leftFace = leftFace;
-
-		content.appendChild(svg);
-		mask.appendChild(content);
-		element.appendChild(mask);
 
 		element.addEventListener('mousedown', this.mousedown.bind(this));
 		element.addEventListener('mouseup', this.mouseup.bind(this));
@@ -124,41 +28,13 @@ class Button {
 		element.addEventListener('touchend', this.mouseup.bind(this));
 		element.addEventListener('click', this.click.bind(this));
 
-		if (this.isToggle) {
-			window.addEventListener('resize', this.size.bind(this));
-		}
-
-		// Editable for reszing
-		this.label = label;
-		this.svg = svg;
-		this.frontFace = frontFace;
-		this.bottomFace = bottomFace;
-		this.leftFace = leftFace;
-
-		this.parentWidth = element.parentNode.offsetWidth;
-		this.buttonWidth = buttonWidth;
-		this.buttonHeight = buttonHeight;
-		this.textWidth = textWidth;
-		this.textHeight = textHeight;
-		this.frontWidth = frontWidth;
-		this.frontHeight = frontHeight;
-		this.depthX = depthX;
-		this.depthY = depthY;
-		this.depthXPressed = depthXPressed;
-		this.depthYPressed = depthYPressed;
-
-		this.buttonWidth = buttonWidth;
-		this.buttonHeight = buttonHeight;
-
-		this.content = content;
-		this.depthX = depthX;
-		this.depthY = depthY;
-		this.depthXPressed = depthXPressed;
-		this.depthYPressed = depthYPressed;
-
-		this.element = element;
-
-
+		window.addEventListener('resize', () => {
+            clearTimeout(this.sizeTimeout);
+            this.sizeTimeout = setTimeout(() => {
+				this.size();
+            }, 300);
+        });
+        this.size();
 		this.selected = false;
 	}
 
@@ -210,39 +86,150 @@ class Button {
 	}
 
 	setText(text) {
-		this.label.children[0].textContent = text;
+		this.label.children[0].innerHTML = text;
 	}
 
 	size() {
-		if (this.parentWidth !== this.element.parentNode.offsetWidth) {
-			let textWidth = this.element.offsetWidth;
-			let textHeight = this.element.offsetHeight;
-			let depthX = GLOBALS.button.states.normal.x;
-			let depthY = GLOBALS.button.states.normal.y;
-			let depthXPressed = GLOBALS.button.states.pressed.x;
-			let depthYPressed = GLOBALS.button.states.pressed.y;
-			
-			this.parentWidth = this.element.parentNode.offsetWidth;
-			let frontWidth = (this.parentWidth / 2) + GLOBALS.button.padding;
-			let frontHeight = textHeight < GLOBALS.button.frontHeight ? GLOBALS.button.frontHeight : textHeight - depthY;
-			frontWidth = (this.parentWidth / 2) - GLOBALS.button.states.normal.x + 3;
+        let element = this.element;
+        element.innerHTML = this.initialElement;
+        element.style.height = 'auto';
+        element.style.width = 'auto';
+        let textWidth = element.offsetWidth;
+        let textHeight = element.offsetHeight;
+        let depthX = GLOBALS.button.states.normal.x;
+        let depthY = GLOBALS.button.states.normal.y;
 
-			let buttonWidth = frontWidth + GLOBALS.button.states.normal.x;
-			let buttonHeight = frontHeight + GLOBALS.button.states.normal.y;
-			this.element.style.width = buttonWidth + 'px';
-			this.element.style.height = buttonHeight + 'px';
-			this.label.style.width = frontWidth + 'px';
-			this.label.style.height = frontHeight + 'px';
-			this.label.style.lineHeight = frontHeight + 'px';
+        let depthXPressed = GLOBALS.button.states.pressed.x;
+        let depthYPressed = GLOBALS.button.states.pressed.y;
 
-			this.svg.setAttribute('width', buttonWidth);
-			this.svg.setAttribute('height', buttonHeight);
 
-			this.frontFace.setAttribute('d', `M${depthX} 0 ${frontWidth + depthX} 0 ${frontWidth + depthX} ${frontHeight} ${depthX} ${frontHeight}z`);
-			this.bottomFace.setAttribute('d', `M${depthX} ${frontHeight} ${frontWidth + depthX} ${frontHeight} ${frontWidth} ${frontHeight + depthY} 0 ${frontHeight + depthY}z`);
-			this.leftFace.setAttribute('d', `M0 ${depthY} ${depthX} 0 ${depthX} ${frontHeight} 0 ${frontHeight + depthY}z`);
-		}
-	}
+        if (element.classList.contains('button__toggle')) {
+            textWidth += 3.5;
+            this.isToggle = true;
+        }
+
+        if (element.classList.contains('button--large')) {
+            textHeight += 20;
+            textWidth += 20;
+        }
+
+        let frontWidth = textWidth + GLOBALS.button.padding;
+        let frontHeight = textHeight < GLOBALS.button.frontHeight ? GLOBALS.button.frontHeight : textHeight;
+
+        if (element.classList.contains('button--small')) {
+            textWidth = 36;
+            textHeight = 30;
+
+            frontWidth = textWidth;
+            frontHeight = textHeight;
+        }
+
+        frontWidth = textWidth - GLOBALS.button.states.normal.x;
+
+        let buttonWidth = frontWidth + GLOBALS.button.states.normal.x;
+        let buttonHeight = frontHeight + GLOBALS.button.states.normal.y;
+
+        var colorClass = 'grey';
+        element.classList.forEach(function(className) {
+            if (className.indexOf('button--color-') > -1) {
+                let index = className.indexOf('button--color-') + 'button--color-'.length;
+                colorClass = className.slice(index);
+            }
+        });
+
+        let buttonContent = element.children[0];
+        buttonContent.classList.remove('button__content');
+        let htmlContent = element.innerHTML;
+        element.innerHTML = '';
+
+        element.style.width = buttonWidth + 'px';
+        element.style.height = buttonHeight + 'px';
+
+
+        let mask = document.createElement('div');
+        mask.classList.add('button__mask');
+
+        let content = document.createElement('div');
+        content.classList.add('button__inner');
+
+
+        let label = document.createElement('div');
+        label.classList.add('button__label');
+        label.innerHTML = htmlContent;
+        label.style.width = frontWidth + 'px';
+        label.style.height = frontHeight + 'px';
+        // label.style.lineHeight = frontHeight + 'px';
+        label.style.left = depthX + 'px';
+        content.appendChild(label);
+        label.style.top = '10px';
+
+        this.label = label;
+
+        let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', buttonWidth);
+        svg.setAttribute('height', buttonHeight);
+        this.svg = svg;
+
+        let frontFace = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        frontFace.classList.add('front-face');
+        frontFace.classList.add('front-face--' + colorClass);
+        frontFace.setAttribute('d', `M${depthX} 0 ${frontWidth + depthX} 0 ${frontWidth + depthX} ${frontHeight} ${depthX} ${frontHeight}z`);
+        svg.appendChild(frontFace);
+        this.frontFace = frontFace;
+
+        let bottomFace = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        bottomFace.classList.add('bottom-face');
+        bottomFace.classList.add('bottom-face--' + colorClass);
+        bottomFace.setAttribute('d', `M${depthX} ${frontHeight} ${frontWidth + depthX} ${frontHeight} ${frontWidth} ${frontHeight + depthY} 0 ${frontHeight + depthY}z`);
+        svg.appendChild(bottomFace);
+        this.bottomFace = bottomFace;
+
+        let leftFace = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        leftFace.classList.add('left-face');
+        leftFace.classList.add('left-face--' + colorClass);
+        leftFace.setAttribute('d', `M0 ${depthY} ${depthX} 0 ${depthX} ${frontHeight} 0 ${frontHeight + depthY}z`);
+        svg.appendChild(leftFace);
+        this.leftFace = leftFace;
+
+        content.appendChild(svg);
+        mask.appendChild(content);
+        element.appendChild(mask);
+
+
+        // Editable for reszing
+        this.label = label;
+        this.svg = svg;
+        this.frontFace = frontFace;
+        this.bottomFace = bottomFace;
+        this.leftFace = leftFace;
+
+        this.parentWidth = element.parentNode.offsetWidth;
+        this.buttonWidth = buttonWidth;
+        this.buttonHeight = buttonHeight;
+        this.textWidth = textWidth;
+        this.textHeight = textHeight;
+        this.frontWidth = frontWidth;
+        this.frontHeight = frontHeight;
+        this.depthX = depthX;
+        this.depthY = depthY;
+        this.depthXPressed = depthXPressed;
+        this.depthYPressed = depthYPressed;
+
+        this.buttonWidth = buttonWidth;
+        this.buttonHeight = buttonHeight;
+
+        this.content = content;
+        this.depthX = depthX;
+        this.depthY = depthY;
+        this.depthXPressed = depthXPressed;
+        this.depthYPressed = depthYPressed;
+
+        this.element = element;
+
+
+        this.selected = false;
+
+    }
 }
 
 
