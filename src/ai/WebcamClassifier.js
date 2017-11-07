@@ -15,14 +15,24 @@
 /* eslint-disable camelcase, max-lines */
 const IMAGE_SIZE = 227;
 const INPUT_SIZE = 1000;
-const TOPK = 10;
+const TOPK = 20;
 const CLASS_COUNT = 3;
 
 const MEASURE_TIMING_EVERY_NUM_FRAMES = 20;
 
+// The following global variables are available for use in onSpcialButtonClick:
+// confidences for each class
+var globConf = [0, 0, 0];
+// number of TOPK images in each class
+var globNCounts = [0, 0, 0];
+
 
 function passThrough() {
   return 0;
+}
+
+function onSpecialButtonClick() {
+  // FILL IN ACTION HERE
 }
 
 class WebcamClassifier {
@@ -93,6 +103,8 @@ class WebcamClassifier {
         location.reload();
       });
     }
+    
+    document.getElementById('specialButton').addEventListener('click', onSpecialButtonClick);
   }
 
   deleteClassData(index) {
@@ -294,40 +306,44 @@ class WebcamClassifier {
       this.math.scope(() => {
         this.saveTrainingLogits(this.current.index);
       });
+      
+        this.current.imagesCount += 1;
+        console.log('Current.ImagesCount ' + this.current.imagesCount); // total # images in class
+        console.log('currentClass.index ' + this.currentClass.index); // 0, 1, 2
 
-      this.current.imagesCount += 1;
-      this.currentClass.setSamples(this.current.imagesCount);
-      if (this.current.latestThumbs.length > 8) {
-        this.current.latestThumbs.shift();
-      }
-      if (this.current.latestImages.length > 8) {
-        this.current.latestImages.shift();
-      }
-
-      this.thumbContext.drawImage(
-        this.video, this.thumbVideoX, 0, this.thumbVideoWidthReal,
-        this.thumbVideoHeight);
-      let data = this.thumbContext.getImageData(
-        0, 0, this.canvasWidth, this.canvasHeight);
-      this.current.latestThumbs.push(data);
-
-      let cols = 0;
-      let rows = 0;
-
-      for (let index = 0; index < this.current.latestThumbs.length; index += 1) {
-        this.currentContext.putImageData(
-          this.current.latestThumbs[index], (2 - cols) * this.thumbCanvas.width,
-          rows * this.thumbVideoHeight, 0, 0, this.thumbCanvas.width,
-          this.thumbCanvas.height);
-        if (cols === 2) {
-          rows += 1;
-          cols = 0;
-        }else {
-          cols += 1;
+        this.currentClass.setSamples(this.current.imagesCount);
+        if (this.current.latestThumbs.length > 8) {
+          this.current.latestThumbs.shift();
         }
-      }
-      this.timer = requestAnimationFrame(this.animate.bind(this));
-    }else if (this.getNumExamples() > 0) {
+        if (this.current.latestImages.length > 8) {
+          this.current.latestImages.shift();
+        }
+
+        this.thumbContext.drawImage(
+          this.video, this.thumbVideoX, 0, this.thumbVideoWidthReal,
+          this.thumbVideoHeight);
+          let data = this.thumbContext.getImageData(
+          0, 0, this.canvasWidth, this.canvasHeight);
+        this.current.latestThumbs.push(data);
+
+        let cols = 0;
+        let rows = 0;
+
+        for (let index = 0; index < this.current.latestThumbs.length; index += 1) {
+          this.currentContext.putImageData(
+            this.current.latestThumbs[index], (2 - cols) * this.thumbCanvas.width,
+            rows * this.thumbVideoHeight, 0, 0, this.thumbCanvas.width,
+            this.thumbCanvas.height);
+          if (cols === 2) {
+            rows += 1;
+            cols = 0;
+          } else {
+            cols += 1;
+          }
+        }
+        this.timer = requestAnimationFrame(this.animate.bind(this)); 
+    }
+    else if (this.getNumExamples() > 0) {
       const numExamples = this.getNumExamples();
 
       let measureTimer = false;
@@ -354,28 +370,34 @@ class WebcamClassifier {
       });
 
       const computeConfidences = () => {
-        const values = knn.getValues();
+	    // comment these lines
         const kVal = Math.min(TOPK, numExamples);
         const topK = this.mathCPU.topK(knn, kVal);
         knn.dispose();
 
+        // These are the indices of the topK (sorted first by class and then the order in which they were taken)
         const indices = topK.indices.getValues();
-
-        const classTopKMap =
-        [
-        0,
-        0,
-        0
-        ];
+        
+        const classTopKMap = [0, 0, 0];
+        
         for (let index = 0; index < indices.length; index += 1) {
           classTopKMap[this.getClassFromIndex(indices[index])] += 1;
         }
 
+        let nCounts = [0, 0, 0];
         let confidences = [];
         for (let index = 0; index < CLASS_COUNT; index += 1) {
+          nCounts[index] = classTopKMap[index];
           const probability = classTopKMap[index] / kVal;
           confidences[index] = probability;
         }
+
+	      // set the global values to they can be used in onSpecialButtonClick
+        globConf = confidences;
+	      globNCounts = nCounts;
+ 
+        console.log('Number of the top ' + TOPK + ' closest matches in each class: ' + nCounts);
+        console.log('Confidence for which the image matches each class: ' + confidences);
 
         GLOBALS.learningSection.setConfidences(confidences);
 
