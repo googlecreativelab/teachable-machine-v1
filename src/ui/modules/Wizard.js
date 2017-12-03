@@ -208,7 +208,6 @@ this.steps.push({
         startTime: 49.599999999999994,
         stopTime: 53.8,
         event: () => {
-            window.removeEventListener('class-trained', this.classTrainedEvent);            
             this.setText('You should now see the green bar and the cat GIF.');
         }
     },
@@ -259,6 +258,7 @@ this.steps.push({
         startTime: 76.3,
         stopTime: 78.8,
         event: () => {
+            window.addEventListener('class-trained', this.classTrainedEvent);
             GLOBALS.learningSection.enableClass(1);
             GLOBALS.learningSection.highlightClass(1);
         }
@@ -517,6 +517,7 @@ classTrained(event) {
         GLOBALS.learningSection.dehighlightClass(0);
         GLOBALS.inputSection.hideGif(0);
         this.play(3);
+        window.removeEventListener('class-trained', this.classTrainedEvent);
     }
 
     if (id === 'purple' && numSamples >= 30) {
