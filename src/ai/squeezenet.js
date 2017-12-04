@@ -19,7 +19,7 @@ import * as imagenet_util from './imagenet_util';
 
 const IMAGE_SIZE = 227;
 const GOOGLE_CLOUD_STORAGE_DIR =
-    'https://storage.googleapis.com/learnjs-data/checkpoint_zoo/';
+    'https://storage.googleapis.com/teachable-machine-squeezenet/';
 
 class SqueezeNet {
 

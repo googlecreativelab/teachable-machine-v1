@@ -157,7 +157,7 @@ class LearningClass {
 		this.section.startRecording(this.index);
 
 		this.buttonUpEvent = this.buttonUp.bind(this);
-		window.addEventListener('mouseup', this.buttonUpEvent.bind(this));
+		window.addEventListener('mouseup', this.buttonUpEvent);
 
 		GLOBALS.recording = true;
 		GLOBALS.classId = this.id;
