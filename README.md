@@ -4,6 +4,8 @@ Teachable Machine is an experiment that makes it easier for anyone to explore ma
 
 The experiment is built using the [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) library.
 
+We have also released a boilerplate version of this project that can be used as a starting point for your own projects: [googlecreativelab/teachable-machine-boilerplate](https://github.com/googlecreativelab/teachable-machine-boilerplate)
+
 ## Development
 #### Install dependencies by running (similar to `npm install`)
 ```
