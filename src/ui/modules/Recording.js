@@ -351,7 +351,7 @@ class Recording {
             this.shareButton.element.style.display = 'inline-block';
             this.shareButton.element.style.top = '50px';
             this.recordingVideo.setAttribute('src', url);
-            this.sharingNotice.style.display = 'block';
+            // this.sharingNotice.style.display = 'block';
         };
         setTimeout(() => {
             this.startButton.element.classList.remove('animate');

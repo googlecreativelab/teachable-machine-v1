@@ -35,7 +35,7 @@ class LaunchScreen {
         let defaultPrevent = (event) => {
             event.preventDefault();
         };
-        /*eslint-enable*/
+        /* eslint-enable*/
         intro.addEventListener('touchstart', defaultPrevent);
         intro.addEventListener('touchmove', defaultPrevent);
 

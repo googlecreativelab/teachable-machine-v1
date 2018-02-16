@@ -541,9 +541,7 @@ ended() {
     this.playing = false;
     this.stopAudioTimer();
 
-
-    switch (this.currentIndex) {
-        case 0:
+    if (this.currentIndex === 0) {
         let that = this;
 
         if (localStorage.getItem('webcam_status') === null) {
@@ -557,11 +555,8 @@ ended() {
             this.play(7);
 
         }
-        break;
-
-        default:
-        break;
     }
+
 }
 
 

@@ -390,12 +390,12 @@ class SoundOutput {
 
 	touchAudio() {
         for (let key in this.sounds) {
-            /*eslint-disable */
+            /* eslint-disable */
             if (this.sounds.hasOwnProperty(key)) {
                 this.sounds[key].play();
                 this.sounds[key].pause();
             }
-            /*eslint-enable */
+            /* eslint-enable */
         }
     }
 }

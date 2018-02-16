@@ -15,7 +15,7 @@
 class BrowserUtils {
 
     constructor() {
-        /*eslint-disable */
+        /* eslint-disable */
         this.isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
         this.isSafari = navigator.userAgent.indexOf('Safari') > -1;
         this.isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
@@ -95,7 +95,7 @@ class BrowserUtils {
         let match = ua.match(/android\s([0-9\.]*)/);
         return match ? parseInt(match[1], 10) : false;
     }
-    /*eslint-enable */
+    /* eslint-enable */
 }
 
 export default BrowserUtils;
