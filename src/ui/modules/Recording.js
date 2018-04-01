@@ -24,7 +24,6 @@ class Recording {
         this.recordingVideo = element.querySelector('#recording__video');
         this.recordTimer = element.querySelector('#record__timer');
         this.closeButton = element.querySelector('#close__button');
-        this.recordTimer = element.querySelector('#record__timer');
         this.restart = element.querySelector('#restart');
         this.recordMessage = element.querySelector('#message');
         this.recordMessageAlt = element.querySelector('#message-alt');
