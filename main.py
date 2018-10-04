@@ -36,7 +36,7 @@ class ShareVideo(webapp2.RequestHandler):
                     url = 'https://graph-video.facebook.com/v2.10/me/videos'
                     query = {
                         'access_token': accessToken,
-                        'description': 'I just trained my own neural net! Explore machine learning with #teachablemachine: http://g.co/teachablemachine'
+                        'description': 'Train your own neural net and explore machine learning with #teachablemachine: http://g.co/teachablemachine'
                     }
                     files = {
                         'source': (video.filename, video.file, video.type)

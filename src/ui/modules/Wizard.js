@@ -361,14 +361,14 @@ this.steps.push({
     },
     {
         startTime: 112.6,
-        stopTime: 120.7,
+        stopTime: 119,
         event: () => {
             this.setText('Below, you’ll find some ideas for things to try, and links to learn more.');
         }
     },
     {
-        startTime: 120.8,
-        stopTime: 120.89999999999999,
+        startTime: 119,
+        stopTime: 119.1,
         event: () => {
             this.setText('');
             this.skip();
@@ -377,6 +377,7 @@ this.steps.push({
     }
     ]
 });
+
 
 this.steps.push({
     startTime: 131,
@@ -512,8 +513,9 @@ classTrained(event) {
     if (numSamples < 30) {
         this.play(6);
     }
-
-    if (id === 'green' && numSamples >= 30) {
+    
+    if (id === 'green' && numSamples >= 30 && !this.greenDone) {
+        this.greenDone = true;
         GLOBALS.learningSection.dehighlightClass(0);
         GLOBALS.inputSection.hideGif(0);
         this.play(3);

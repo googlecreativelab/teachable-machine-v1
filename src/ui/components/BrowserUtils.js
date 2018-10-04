@@ -20,6 +20,7 @@ class BrowserUtils {
         this.isSafari = navigator.userAgent.indexOf('Safari') > -1;
         this.isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
         this.isIE = navigator.userAgent.indexOf('MSIE') > -1;
+        this.isEdge = navigator.userAgent.indexOf('Edge') > -1;
         this.isMobile = false;
         this.isChrome = /chrome/i.test(navigator.userAgent);
         this.isCompatible;

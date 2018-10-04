@@ -172,9 +172,9 @@ class SpeechOutput {
         this.currentIcon = icon;
     }
 
-    trigger(index) {
+    trigger(index, overrideAndPlay = false) {
         if (!GLOBALS.clearing) {
-            if (this.currentIndex !== index) {
+            if (this.currentIndex !== index || overrideAndPlay) {
                 this.canTrigger = false;
                 this.currentIndex = index;
 
@@ -235,6 +235,9 @@ class SpeechOutput {
 
     start() {
         this.element.style.display = 'block';
+        if (typeof this.currentIndex === 'number') {
+            this.trigger(this.currentIndex, true);
+        }
     }
 
     buildCanvas() {

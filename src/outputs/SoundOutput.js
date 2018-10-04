@@ -147,13 +147,17 @@ class SoundOutput {
 	}
 
     handleVisibilityChange() {
-		if (this.currentSound === null) {
-            this.currentSound;
-		}else if (document.hidden) {
-            this.currentSound.pause();
-        }else {
-            this.currentSound.play();
-        }
+		if (GLOBALS.outputSection.currentOutput &&
+			GLOBALS.outputSection.currentOutput.id === 'SoundOutput'
+		) {
+			if (this.currentSound === null) {
+				this.currentSound;
+			}else if (document.hidden) {
+				this.currentSound.pause();
+			}else {
+				this.currentSound.play();
+			}
+		}
     }
 
     playCurrentSound() {
@@ -339,6 +343,7 @@ class SoundOutput {
 
 	start() {
 		this.element.style.display = 'block';
+		this.handleVisibilityChange();
 	}
 
 	buildCanvas() {

@@ -177,8 +177,9 @@ class LearningSection {
 	}
 
 	setConfidences(confidences) {
-		let maxIndex = this.getMaxIndex(confidences);
-		let maxValue = confidences[maxIndex];
+		const confidencesArry = Object.values(confidences);
+		let maxIndex = this.getMaxIndex(confidencesArry);
+		let maxValue = confidencesArry[maxIndex];
 		// if (maxValue > 0.5 && this.currentIndex !== maxIndex) {
 		if (maxValue > 0.5) {
 			this.currentIndex = maxIndex;
@@ -188,7 +189,7 @@ class LearningSection {
 		}
 
 		for (let index = 0; index < 3; index += 1) {
-			this.learningClasses[index].setConfidence(confidences[index] * 100);
+			this.learningClasses[index].setConfidence(confidencesArry[index] * 100);
 			if (index === maxIndex) {
 				this.learningClasses[index].highlightConfidence();
 			}else { 

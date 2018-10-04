@@ -14,7 +14,7 @@
 	padding-top: space(8)
 	padding-bottom: space(10)
 	text-align: center
-	
+
 	@extend .font__size--small
 	letter-spacing: 0.3px
 }
@@ -72,10 +72,13 @@
 	width: 325px
 	background: white
 	padding: 20px
+	z-index: 999
 
-	img {
-		margin-left: 20px
-		float: right
+	.camera-icon {
+		display: inline-block
+		height: auto
+		max-width: 25px
+		vertical-align: middle
 	}
 }
 
@@ -87,6 +90,8 @@
 	width: 100%
 	height: 100%
 	position: relative
+	min-width: 227px
+    min-height: 227px
 }
 
 .input__media__flip {
@@ -98,6 +103,8 @@
 	position: absolute
 	left: 50%
 	top: 50%
+	min-width: 280px
+    min-height: 280px
 }
 
 .section--learning {
@@ -204,7 +211,7 @@
 	width: 100%
 	height: 50px
 	flex: none
-	
+
 	@extend .font__size--small
 	@extend .uppercase
 }
@@ -320,7 +327,7 @@
 	margin-left: space(-1)
 }
 
-.output__controls {	
+.output__controls {
 	height: 40px
 	display: flex
 }
@@ -334,7 +341,7 @@
 	display: flex
 	justify-content: space-around
 	align-items: center
-	
+
 	@extend .font__size--large
 }
 
@@ -351,7 +358,7 @@
 }
 
 .output_selector__option:hover {
-	@extend .output_selector__option--selected	
+	@extend .output_selector__option--selected
 }
 
 // .output__selector-title-wrapper {
@@ -360,7 +367,7 @@
 // 	height: 100%
 // 	top: 0
 // 	background: $color__white
-	
+
 // }
 
 
@@ -423,7 +430,7 @@
 }
 
 .wires--right {
-	
+
 }
 
 .wires__bulb {
@@ -447,7 +454,7 @@
 
 .wires__bulb-purple {
 	background-position-x: -22px
-	
+
 }
 
 .wires__bulb-orange {
@@ -498,7 +505,7 @@
 	.wires {
 		margin-top: 51px
 	}
-	
+
 	.wires__bulb {
 		display: none
 	}
@@ -539,7 +546,7 @@
 
 	.input {
 		max-width: 300px
-		
+
 		.section__container {
 			display: flex
 			flex-direction: column
@@ -550,13 +557,13 @@
 			order: 2
 			margin-bottom: 0
 		}
-		
+
 		.button-set {
 			order: 1
 			margin-bottom: space(1)
 		}
 	}
-	
+
 	.section--output {
 		max-width: 300px
 		top: -10px
@@ -670,9 +677,9 @@
 		stroke: #CED1D2
 		stroke-width: 3px
 	}
-	
+
 	// @stylint off
-		
+
 	.wire-green,
 	.wire-purple,
 	.wire-orange {
@@ -711,8 +718,8 @@
 			filter: url(#blur-filter)
 		}
 	}
-	
-	
+
+
 
 	@keyframes dash {
 		from {
@@ -722,7 +729,7 @@
 			stroke-dashoffset: 0
 		}
 	}
-	
+
 	// @stylint on
 
 	.wires--right {
@@ -747,7 +754,7 @@
 			background-color: #ededee
 		}
 	}
-	
+
 	.section__container {
 		display: flex
 		padding: 10px
@@ -801,7 +808,7 @@
 		margin: 10px 0
 		width: 100%
 	}
-	
+
 	.quality__status {
 		text-align: center
 	}

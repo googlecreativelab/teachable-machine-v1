@@ -37,6 +37,7 @@ class Recording {
 
         this.recordMessageAlt.style.display = 'none';
         this.recordingVideo.style.display = 'none';
+        this.recordingVideo.setAttribute('src', '');
         this.canvas.width = 680;
         this.canvas.height = 340;
         this.video = document.getElementsByTagName('video')[0];
@@ -52,10 +53,7 @@ class Recording {
         this.RECORD_TIME = 10000;
 
         this.startButton = new Button(document.querySelector('#recording__start-button'));
-        this.shareButton = new Button(document.querySelector('#recording__share-button'));
         this.startRecordEvent = this.onRecordButtonClick.bind(this);
-        this.shareButton.element.addEventListener('click', this.onShareButtonClick.bind(this));
-        this.shareButton.element.style.display = 'none';
         this.checkbox.addEventListener('click', this.toggleCheckbox.bind(this));
     }
 
@@ -200,6 +198,8 @@ class Recording {
         if (this.mediaRecorder.state !== 'inactive') {
             this.mediaRecorder.stop();
         }
+        clearTimeout(this.recordingTimeout);
+        GLOBALS.webcamClassifier.stopTimer();
     }
 
     onRecordButtonClick() {
@@ -214,6 +214,7 @@ class Recording {
             if (this.mediaRecorder) {
                 if (this.mediaRecorder.state !== 'inactive') {
                     this.mediaRecorder.stop();
+                    this.stopRecording();
                 }
                 this.recordingState = 'waiting';
                 this.recordTimer.style.display = 'none';
@@ -224,7 +225,6 @@ class Recording {
             this.shareOnFb();
             break;
             case 'successMessage':
-            this.shareButton.element.style.display = 'none';
             this.recordingState = 'waiting';
             break;
             default:
@@ -233,7 +233,6 @@ class Recording {
     }
 
     onShareButtonClick() {
-        this.shareButton.element.style.display = 'none';
         this.recordingState = 'waiting';
         this.shareOnFb();
         this.downloadLinkSection.style.marginLeft = 0;
@@ -241,6 +240,7 @@ class Recording {
 
 
     reset() {
+        GLOBALS.webcamClassifier.startTimer();
         this.recordingState = 'waiting';
         this.recordTimer.style.display = 'block';
         this.startButton.element.style.top = 0;
@@ -249,7 +249,6 @@ class Recording {
         this.recordMessageAlt.style.display = 'none';
         this.startButton.element.style.display = 'inline-block';
         this.legal.style.display = 'block';
-        this.shareButton.element.style.display = 'none';
         this.downloadLinkSection.style.display = 'none';
         document.querySelector('#recording__start-button .button__label #icon--stop').style.display = 'none';
         document.querySelector('#recording__start-button .button__label #icon--record').style.display = 'inline-block';
@@ -257,9 +256,10 @@ class Recording {
         this.canvas.style.display = 'block';
         this.sharingNotice.style.display = 'none';
         this.recordingVideo.style.display = 'none';
+        this.recordingVideo.setAttribute('src', '');
         this.stopRecordingTime();
         this.stopCountdown();
-        this.downloadPreText.innerText = 'or, ';
+        this.downloadPreText.innerText = '';
     }
 
     countdown() {
@@ -347,12 +347,10 @@ class Recording {
             this.downloadLinkButton.download = 'teachable-machine.webm';
             this.startButton.element.style.display = 'none';
             this.legal.style.display = 'none';
-            this.shareButton.element.style.display = 'inline-block';
-            this.shareButton.element.style.top = '50px';
             this.recordingVideo.setAttribute('src', url);
             // this.sharingNotice.style.display = 'block';
         };
-        setTimeout(() => {
+        this.recordingTimeout = setTimeout(() => {
             this.startButton.element.classList.remove('animate');
             this.stopRecording();
         },
@@ -373,6 +371,7 @@ class Recording {
 
     hide() {
         this.element.classList.remove('fadein');
+        GLOBALS.webcamClassifier.startTimer();
         setTimeout(() => {
             this.element.style.opacity = 0;
             this.element.style.pointerEvents = 'none';

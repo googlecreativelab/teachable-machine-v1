@@ -33,6 +33,7 @@
     <link href="https://fonts.googleapis.com/css?family=Caveat:700|Poppins:400,500,600,700" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <script src="bundle.js"></script>
+    <!-- Updated 1533336779 -->
 </head>
 <body class="no-scroll">
     <div class="wrapper">
@@ -68,7 +69,7 @@
                     </span>
                     <span class="intro__content-mobile-incompatible" id="is-not-compatible">
                         Sorry, looks like your browser or device doesn't support this experiment. Learn more about
-                        Teachable Machine <a href="" class="link">here.</a> Or try visiting this site on a desktop
+                        Teachable Machine <a href="https://experiments.withgoogle.com/teachable-machine" target="_blank" class="link">here.</a> Or try visiting this site on a desktop
                         computer in a
                         browser like Chrome.
                     </span>
@@ -242,7 +243,7 @@
     </div>
     <div class="recording__inner">
         <p class="message" id="message">Record a 10-second video clip. You can use your mic to say something about it.</p>
-        <p class="restart" id="message-alt">Share your video below, or <a href="#" class="restart" id="restart">redo it</a>.</p>
+        <p class="restart" id="message-alt">Download your video below, or <a href="#" class="restart" id="restart">redo it</a>.</p>
         <canvas id="recording__canvas" class="recording__canvas"></canvas>
         <video id="recording__video" width="680" height="340" autoplay loop controls></video>
         <p class="record__timer" id="record__timer">0:10</p>
@@ -254,12 +255,12 @@
                     <span id="recording__start-text">Start Recording</span>
                 </span>
             </a>
-            <a href="#" class="button button--color-facebook recording-share__button" id="recording__share-button">
-                <span class="button__content">
-                    <span id="icon--share" class="icon icon--share"></span>Post to Facebook
-                </span>
-            </a>
-            <p class="recording-download-container"><span id="pre-download-message">or, </span><a
+            <!--<a href="#" class="button button&#45;&#45;color-facebook recording-share__button" id="recording__share-button">-->
+                <!--<span class="button__content">-->
+                    <!--<span id="icon&#45;&#45;share" class="icon icon&#45;&#45;share"></span>Post to Facebook-->
+                <!--</span>-->
+            <!--</a>-->
+            <p class="recording-download-container"><span id="pre-download-message"></span><a
                     id="recording__download"
                                                                          class="recording__download">Download it!</a></p>
             <p id="sharing-notice" class="sharing-notice">(Heads up, sharing doesn't work just yet. It should be be working soon!)</p>
@@ -293,8 +294,8 @@
             <h3 class="faq__question">How do I learn more about machine learning?</h3>
             <p class="faq__answer"><a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">Here’s</a> an intro-level video explainer. <a href="http://playground.tensorflow.org" target="_blank" class="link">This</a> site lets you interact with neural networks in more detail. And this <a href="https://www.kadenze.com/courses/machine-learning-for-musicians-and-artists/info" target="_blank" class="link">free online course</a> lets you dive in even deeper.</p>
             <h3 class="faq__question">How was this built?</h3>
-            <p class="faq__answer">The image classification is powered by a <a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">neural network</a>. It was made possible by Nikhil Thorat and Daniel Smilkov, the team behind <a href="https://pair-code.github.io/deeplearnjs/" target="_blank" class="link">deeplearn.js</a>. It’s an open-source library that allows web developers to train and run machine learning models locally in the browser. The code for this experiment is open-sourced <a href="https://github.com/googlecreativelab/teachable-machine" target="_blank" class="link">here on Github</a>.</p>
-            <p class="faq__answer">We also made a boilerplate project which demonstrates how to use deeplearn.js to create projects of your own like Teachable Machine <a href="https://github.com/googlecreativelab/teachable-machine-boilerplate"  target="_blank" class="link">here</a>.</p>
+            <p class="faq__answer">The image classification is powered by a <a href="https://www.youtube.com/watch?v=bHvf7Tagt18" target="_blank" class="link">neural network</a>. It was made possible by Nikhil Thorat and Daniel Smilkov, the team behind <a href="https://js.tensorflow.org/" target="_blank" class="link">TensorFlow.js</a>. It’s an open-source library that allows web developers to train and run machine learning models locally in the browser. The code for this experiment is open-sourced <a href="https://github.com/googlecreativelab/teachable-machine" target="_blank" class="link">here on Github</a>.</p>
+            <p class="faq__answer">We also made a boilerplate project which demonstrates how to use TensorFlow.js to create projects of your own like Teachable Machine <a href="https://github.com/googlecreativelab/teachable-machine-boilerplate"  target="_blank" class="link">here</a>.</p>
             <h3 class="faq__question">Who made this?</h3>
             <p class="faq__answer">This experiment was a collaborative effort by friends from <a href="http://stoj.io" target="_blank" class="link">Støj</a>, <a href="https://useallfive.com/" target="_blank" class="link">Use All Five</a> and Creative Lab and PAIR teams at Google.</p>
         </div>
@@ -304,11 +305,7 @@
     <a href="https://experiments.withgoogle.com/ai" target="_blank" class="link"><img class="footer__image" src="./assets/footer.svg" alt="Made with some friends at Google"></a>
     <a href="https://www.google.com/policies/" target="_blank" class="link link--privacy">Privacy &amp; Terms</a>
 </footer>
-<p id="input__media__activate" class="input__media__activate">
-    <img src="./assets/arrows/arrow-4.svg" width="30" height="80">To teach your machine,
-    <span class="input__media__activate--desktop"> you need to click up here to turn on your camera and then <a href="#">refresh the page</a>.</span>
-    <span class="input__media__activate--mobile"> you need to <a href="#">refresh the page</a> and allow camera access.</span>
-</p>
+<p id="input__media__activate" class="input__media__activate"></p>
 </div>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107306747-1"></script>
 <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)}; gtag('js', new Date()); gtag('config', 'UA-107306747-1'); </script>

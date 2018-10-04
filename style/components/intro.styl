@@ -21,7 +21,7 @@
 	width: 30px
 	height: 30px
 	margin: 0 0 0 space(0.5)
-	
+
 	svg {
 		margin: 15%
 		width: 70%
@@ -60,7 +60,11 @@
 .intro__footer-image {
 	width: 100%
 }
-	
+
+.intro__content-mobile {
+	display: none
+}
+
 .intro__content-mobile-incompatible {
 	display: none
 }
@@ -158,15 +162,16 @@
 	.intro__inner {
 		padding-top: 0
 	}
-	
+
 	.intro__content-desktop {
 		display: none
 	}
-	
+
 	.intro__content-mobile {
 		background: $color__white
 		border-radius: 5px
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+		display: block
 		margin: 0 auto
 		padding: 25px
 		position: relative
@@ -297,4 +302,3 @@
 		width: 25%
 	}
 }
-	
