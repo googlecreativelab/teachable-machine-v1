@@ -88,6 +88,7 @@ class BrowserUtils {
         }
 
         canvas = undefined;
+        console.log(support);
         return support;
     };
 

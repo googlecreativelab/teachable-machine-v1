@@ -50,7 +50,7 @@ function init() {
 	}
 
 	// Camera status messages per browser
-	if (GLOBALS.browserUtils.isChrome) {
+	if (GLOBALS.browserUtils.isChrome && !GLOBALS.browserUtils.isEdge) {
 		document.querySelector('.input__media__activate').innerHTML = 'To teach your machine, <span class="input__media__activate--desktop"> you need to click up here to turn on your camera and then <a href="#">refresh the page</a>.</span><span class="input__media__activate--mobile"> you need to <a href="#">refresh the page</a> and allow camera access.</span></p>';
 
 		if (!GLOBALS.browserUtils.isCompatable) {
