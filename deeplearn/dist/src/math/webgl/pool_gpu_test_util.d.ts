@@ -1,1 +1,0 @@
-export declare function uploadPoolDownload(a: Float32Array, xShape: [number, number, number], filterSizes: [number, number] | number, strides: [number, number] | number, zeroPad: number | 'valid' | 'same', op: 'min' | 'max' | 'avg'): Float32Array;
