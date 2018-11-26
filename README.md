@@ -19,7 +19,7 @@ yarn build
 
 #### Start local server by running 
 ```
-yarn run watch
+yarn watch
 ```
 
 #### Code Styles
